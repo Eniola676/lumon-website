@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-anonymous-pro);
+
+  --color-ink: #1d1f2c;
+  --color-paper: #fbfbfb;
+  --color-near-black: #070707;
+  --color-line: #e9e9ea;
+  --color-line-dark: #1f1f1f;
+}
+
+html {
+  font-family: var(--font-sans), sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: var(--color-ink);
+}
+
+button {
+  cursor: pointer;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
