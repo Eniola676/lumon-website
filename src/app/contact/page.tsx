@@ -79,7 +79,7 @@ export default function ContactPage() {
                   Email
                 </dt>
                 <dd className="mt-1 text-sm text-gray-700">
-                  [ TOBI@LUMONSTUDIOS.COM — replace with your real email ]
+                  <a href="mailto:tobi@lumonstudio.xyz" className="underline hover:text-black transition-colors">tobi@lumonstudio.xyz</a>
                 </dd>
               </div>
               <div>
@@ -87,7 +87,7 @@ export default function ContactPage() {
                   LinkedIn
                 </dt>
                 <dd className="mt-1 text-sm text-gray-700">
-                  [ LINKEDIN URL — link to Tobi&rsquo;s profile ]
+                  <a href="https://www.linkedin.com/company/lumon-studio/" target="_blank" rel="noopener noreferrer" className="underline hover:text-black transition-colors">Lumon Studio</a>
                 </dd>
               </div>
             </dl>
