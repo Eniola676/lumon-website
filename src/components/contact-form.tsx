@@ -2,15 +2,24 @@
 
 import {
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type FormEvent,
   type KeyboardEvent,
+  type MouseEvent as ReactMouseEvent,
 } from "react";
+import { gsap } from "gsap";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const CONTACT_EMAIL = "tobi@lumonstudio.xyz";
+
+const PAIN_OPTIONS = [
+  "My website isn't built to convert.",
+  "I don't have a system to sell my course yet.",
+  "My tools are scattered and don't talk to each other.",
+];
 
 const PROGRAM_OPTIONS = [
   "Lumon Launch",
@@ -19,7 +28,7 @@ const PROGRAM_OPTIONS = [
   "Not sure yet",
 ];
 
-const STEPS = ["name", "email", "program", "message"] as const;
+const STEPS = ["pain", "program", "name", "email", "message"] as const;
 type Step = (typeof STEPS)[number];
 
 const inputClasses =
@@ -33,22 +42,91 @@ function KeyHint({ children }: { children: string }) {
   );
 }
 
+function OptionButton({
+  label,
+  index,
+  selected,
+  onClick,
+}: {
+  label: string;
+  index: number;
+  selected: boolean;
+  onClick: (event: ReactMouseEvent<HTMLButtonElement>) => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={(event) => {
+        gsap.fromTo(
+          event.currentTarget,
+          { scale: 0.97 },
+          { scale: 1, duration: 0.35, ease: "elastic.out(1, 0.5)" }
+        );
+        onClick(event);
+      }}
+      className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-base transition-colors ${
+        selected
+          ? "border-black bg-black text-white"
+          : "border-[#e9e9ea] bg-white hover:border-black"
+      }`}
+    >
+      <span
+        className={`flex size-6 shrink-0 items-center justify-center rounded-md border font-mono text-xs ${
+          selected
+            ? "border-white/40 text-white"
+            : "border-[#e9e9ea] text-gray-400"
+        }`}
+      >
+        {String.fromCharCode(65 + index)}
+      </span>
+      {label}
+    </button>
+  );
+}
+
 export function ContactForm() {
   const [stepIndex, setStepIndex] = useState(0);
   const [done, setDone] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [pain, setPain] = useState("");
+  const [customPain, setCustomPain] = useState(false);
   const [program, setProgram] = useState("");
   const [customProgram, setCustomProgram] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const isFirstMount = useRef(true);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const progressFillRef = useRef<HTMLDivElement>(null);
+  const directionRef = useRef<"forward" | "backward">("forward");
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const step: Step = STEPS[stepIndex];
 
+  // Card entrance, once.
   useEffect(() => {
+    if (cardRef.current) {
+      gsap.fromTo(
+        cardRef.current,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+      );
+    }
+  }, []);
+
+  // Animate the current step in whenever it changes (and focus its input).
+  useLayoutEffect(() => {
+    if (contentRef.current) {
+      const offset = directionRef.current === "forward" ? 28 : -28;
+      gsap.fromTo(
+        contentRef.current,
+        { opacity: 0, x: offset },
+        { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }
+      );
+    }
+
     if (isFirstMount.current) {
       isFirstMount.current = false;
       return;
@@ -56,14 +134,63 @@ export function ContactForm() {
     if (done) return;
     if (step === "message") textareaRef.current?.focus();
     else inputRef.current?.focus();
-  }, [step, done, customProgram]);
+  }, [step, done, customPain, customProgram]);
+
+  // Animate the progress bar fill.
+  useEffect(() => {
+    if (progressFillRef.current) {
+      gsap.to(progressFillRef.current, {
+        width: `${((stepIndex + 1) / STEPS.length) * 100}%`,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+    }
+  }, [stepIndex]);
+
+  function transitionTo(nextIndex: number, direction: "forward" | "backward") {
+    if (!contentRef.current) {
+      setStepIndex(nextIndex);
+      return;
+    }
+    directionRef.current = direction;
+    const exitOffset = direction === "forward" ? -28 : 28;
+    gsap.to(contentRef.current, {
+      opacity: 0,
+      x: exitOffset,
+      duration: 0.2,
+      ease: "power2.in",
+      onComplete: () => setStepIndex(nextIndex),
+    });
+  }
 
   function goNext() {
-    setStepIndex((i) => Math.min(i + 1, STEPS.length - 1));
+    transitionTo(Math.min(stepIndex + 1, STEPS.length - 1), "forward");
   }
 
   function goBack() {
-    setStepIndex((i) => Math.max(i - 1, 0));
+    transitionTo(Math.max(stepIndex - 1, 0), "backward");
+  }
+
+  function selectPain(value: string) {
+    setPain(value);
+    window.setTimeout(goNext, 220);
+  }
+
+  function handlePainTypedSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!pain.trim()) return;
+    goNext();
+  }
+
+  function selectProgram(value: string) {
+    setProgram(value);
+    window.setTimeout(goNext, 220);
+  }
+
+  function handleProgramTypedSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!program.trim()) return;
+    goNext();
   }
 
   function handleNameSubmit(event: FormEvent<HTMLFormElement>) {
@@ -78,22 +205,12 @@ export function ContactForm() {
     goNext();
   }
 
-  function selectProgram(value: string) {
-    setProgram(value);
-    window.setTimeout(goNext, 200);
-  }
-
-  function handleProgramTypedSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!program.trim()) return;
-    goNext();
-  }
-
   function submitAll() {
     const subject = "Lumon Studios inquiry";
     const body = [
       `Name: ${name}`,
       `Email: ${email}`,
+      `Pain point: ${pain || "Not specified"}`,
       `Program: ${program || "Not specified"}`,
       "",
       "Project details:",
@@ -103,7 +220,18 @@ export function ContactForm() {
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
-    setDone(true);
+
+    if (contentRef.current) {
+      gsap.to(contentRef.current, {
+        opacity: 0,
+        y: -12,
+        duration: 0.2,
+        ease: "power2.in",
+        onComplete: () => setDone(true),
+      });
+    } else {
+      setDone(true);
+    }
   }
 
   function handleMessageSubmit(event: FormEvent<HTMLFormElement>) {
@@ -120,7 +248,10 @@ export function ContactForm() {
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-[#e9e9ea] bg-white p-8 sm:p-10">
+      <div
+        ref={cardRef}
+        className="rounded-2xl border border-[#e9e9ea] bg-white p-8 sm:p-10"
+      >
         <div className="flex size-12 items-center justify-center rounded-full bg-black text-white">
           <Check className="size-5" />
         </div>
@@ -152,14 +283,16 @@ export function ContactForm() {
   }
 
   return (
-    <div className="rounded-2xl border border-[#e9e9ea] bg-white p-8 sm:p-10">
+    <div
+      ref={cardRef}
+      className="overflow-hidden rounded-2xl border border-[#e9e9ea] bg-white p-8 sm:p-10"
+    >
       {/* Progress bar */}
       <div className="h-1 w-full overflow-hidden rounded-full bg-[#e9e9ea]">
         <div
-          className="h-full rounded-full bg-black transition-all duration-300 ease-out"
-          style={{
-            width: `${((stepIndex + 1) / STEPS.length) * 100}%`,
-          }}
+          ref={progressFillRef}
+          className="h-full rounded-full bg-black"
+          style={{ width: `${((stepIndex + 1) / STEPS.length) * 100}%` }}
         />
       </div>
 
@@ -179,162 +312,216 @@ export function ContactForm() {
         )}
       </div>
 
-      {step === "name" && (
-        <form key="name" onSubmit={handleNameSubmit} className="mt-6">
-          <label
-            htmlFor="cf-name"
-            className="block text-2xl font-normal tracking-tight sm:text-3xl"
-          >
-            What&rsquo;s your name?
-          </label>
-          <input
-            ref={inputRef}
-            id="cf-name"
-            name="name"
-            type="text"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className={`${inputClasses} mt-6`}
-            placeholder="Jane Doe"
-          />
-          <KeyHint>Press Enter ↵</KeyHint>
-          <Button type="submit" variant="primary" className="mt-6">
-            Continue
-            <ArrowRight className="size-4" />
-          </Button>
-        </form>
-      )}
+      <div ref={contentRef} className="mt-6">
+        {step === "pain" && (
+          <div>
+            <p className="text-2xl font-normal tracking-tight sm:text-3xl">
+              What&rsquo;s slowing you down right now?
+            </p>
 
-      {step === "email" && (
-        <form key="email" onSubmit={handleEmailSubmit} className="mt-6">
-          <label
-            htmlFor="cf-email"
-            className="block text-2xl font-normal tracking-tight sm:text-3xl"
-          >
-            What&rsquo;s the best email to reach you, {name.split(" ")[0] || "there"}?
-          </label>
-          <input
-            ref={inputRef}
-            id="cf-email"
-            name="email"
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={`${inputClasses} mt-6`}
-            placeholder="jane@example.com"
-          />
-          <KeyHint>Press Enter ↵</KeyHint>
-          <Button type="submit" variant="primary" className="mt-6">
-            Continue
-            <ArrowRight className="size-4" />
-          </Button>
-        </form>
-      )}
-
-      {step === "program" && (
-        <div className="mt-6">
-          <p className="text-2xl font-normal tracking-tight sm:text-3xl">
-            Which program interests you?
-          </p>
-
-          {!customProgram ? (
-            <>
-              <div className="mt-6 space-y-3">
-                {PROGRAM_OPTIONS.map((option, index) => (
-                  <button
-                    key={option}
-                    type="button"
-                    onClick={() => selectProgram(option)}
-                    className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-base transition-colors ${
-                      program === option
-                        ? "border-black bg-black text-white"
-                        : "border-[#e9e9ea] bg-white hover:border-black"
-                    }`}
-                  >
-                    <span
-                      className={`flex size-6 shrink-0 items-center justify-center rounded-md border font-mono text-xs ${
-                        program === option
-                          ? "border-white/40 text-white"
-                          : "border-[#e9e9ea] text-gray-400"
-                      }`}
-                    >
-                      {String.fromCharCode(65 + index)}
-                    </span>
-                    {option}
-                  </button>
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setProgram("");
-                  setCustomProgram(true);
-                }}
-                className="mt-4 text-sm text-gray-500 underline hover:text-black"
-              >
-                Or type your own answer instead
-              </button>
-            </>
-          ) : (
-            <form onSubmit={handleProgramTypedSubmit} className="mt-6">
-              <input
-                ref={inputRef}
-                type="text"
-                required
-                value={program}
-                onChange={(e) => setProgram(e.target.value)}
-                className={inputClasses}
-                placeholder="Tell us what you're looking for"
-              />
-              <KeyHint>Press Enter ↵</KeyHint>
-              <div className="mt-6 flex flex-wrap items-center gap-4">
-                <Button type="submit" variant="primary">
-                  Continue
-                  <ArrowRight className="size-4" />
-                </Button>
+            {!customPain ? (
+              <>
+                <div className="mt-6 space-y-3">
+                  {PAIN_OPTIONS.map((option, index) => (
+                    <OptionButton
+                      key={option}
+                      label={option}
+                      index={index}
+                      selected={pain === option}
+                      onClick={() => selectPain(option)}
+                    />
+                  ))}
+                </div>
                 <button
                   type="button"
                   onClick={() => {
-                    setCustomProgram(false);
-                    setProgram("");
+                    setPain("");
+                    setCustomPain(true);
                   }}
-                  className="text-sm text-gray-500 underline hover:text-black"
+                  className="mt-4 text-sm text-gray-500 underline hover:text-black"
                 >
-                  Choose from options instead
+                  Or tell us in your own words
                 </button>
-              </div>
-            </form>
-          )}
-        </div>
-      )}
+              </>
+            ) : (
+              <form onSubmit={handlePainTypedSubmit}>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  required
+                  value={pain}
+                  onChange={(e) => setPain(e.target.value)}
+                  className={`${inputClasses} mt-6`}
+                  placeholder="What's slowing you down?"
+                />
+                <KeyHint>Press Enter ↵</KeyHint>
+                <div className="mt-6 flex flex-wrap items-center gap-4">
+                  <Button type="submit" variant="primary">
+                    Continue
+                    <ArrowRight className="size-4" />
+                  </Button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCustomPain(false);
+                      setPain("");
+                    }}
+                    className="text-sm text-gray-500 underline hover:text-black"
+                  >
+                    Choose from options instead
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        )}
 
-      {step === "message" && (
-        <form key="message" onSubmit={handleMessageSubmit} className="mt-6">
-          <label
-            htmlFor="cf-message"
-            className="block text-2xl font-normal tracking-tight sm:text-3xl"
-          >
-            Anything you&rsquo;d like to add?
-          </label>
-          <textarea
-            ref={textareaRef}
-            id="cf-message"
-            name="message"
-            rows={4}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={handleMessageKeyDown}
-            className={`${inputClasses} mt-6`}
-            placeholder="What are you trying to build? (optional)"
-          />
-          <KeyHint>Shift + Enter for a new line · ⌘/Ctrl + Enter to send</KeyHint>
-          <Button type="submit" variant="primary" className="mt-6">
-            Send Message
-          </Button>
-        </form>
-      )}
+        {step === "program" && (
+          <div>
+            <p className="text-2xl font-normal tracking-tight sm:text-3xl">
+              Which program interests you?
+            </p>
+
+            {!customProgram ? (
+              <>
+                <div className="mt-6 space-y-3">
+                  {PROGRAM_OPTIONS.map((option, index) => (
+                    <OptionButton
+                      key={option}
+                      label={option}
+                      index={index}
+                      selected={program === option}
+                      onClick={() => selectProgram(option)}
+                    />
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setProgram("");
+                    setCustomProgram(true);
+                  }}
+                  className="mt-4 text-sm text-gray-500 underline hover:text-black"
+                >
+                  Or type your own answer instead
+                </button>
+              </>
+            ) : (
+              <form onSubmit={handleProgramTypedSubmit}>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  required
+                  value={program}
+                  onChange={(e) => setProgram(e.target.value)}
+                  className={`${inputClasses} mt-6`}
+                  placeholder="Tell us what you're looking for"
+                />
+                <KeyHint>Press Enter ↵</KeyHint>
+                <div className="mt-6 flex flex-wrap items-center gap-4">
+                  <Button type="submit" variant="primary">
+                    Continue
+                    <ArrowRight className="size-4" />
+                  </Button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCustomProgram(false);
+                      setProgram("");
+                    }}
+                    className="text-sm text-gray-500 underline hover:text-black"
+                  >
+                    Choose from options instead
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        )}
+
+        {step === "name" && (
+          <form onSubmit={handleNameSubmit}>
+            <label
+              htmlFor="cf-name"
+              className="block text-2xl font-normal tracking-tight sm:text-3xl"
+            >
+              What&rsquo;s your name?
+            </label>
+            <input
+              ref={inputRef}
+              id="cf-name"
+              name="name"
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={`${inputClasses} mt-6`}
+              placeholder="Jane Doe"
+            />
+            <KeyHint>Press Enter ↵</KeyHint>
+            <Button type="submit" variant="primary" className="mt-6">
+              Continue
+              <ArrowRight className="size-4" />
+            </Button>
+          </form>
+        )}
+
+        {step === "email" && (
+          <form onSubmit={handleEmailSubmit}>
+            <label
+              htmlFor="cf-email"
+              className="block text-2xl font-normal tracking-tight sm:text-3xl"
+            >
+              What&rsquo;s the best email to reach you,{" "}
+              {name.split(" ")[0] || "there"}?
+            </label>
+            <input
+              ref={inputRef}
+              id="cf-email"
+              name="email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={`${inputClasses} mt-6`}
+              placeholder="jane@example.com"
+            />
+            <KeyHint>Press Enter ↵</KeyHint>
+            <Button type="submit" variant="primary" className="mt-6">
+              Continue
+              <ArrowRight className="size-4" />
+            </Button>
+          </form>
+        )}
+
+        {step === "message" && (
+          <form onSubmit={handleMessageSubmit}>
+            <label
+              htmlFor="cf-message"
+              className="block text-2xl font-normal tracking-tight sm:text-3xl"
+            >
+              Anything you&rsquo;d like to add?
+            </label>
+            <textarea
+              ref={textareaRef}
+              id="cf-message"
+              name="message"
+              rows={4}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={handleMessageKeyDown}
+              className={`${inputClasses} mt-6`}
+              placeholder="What are you trying to build? (optional)"
+            />
+            <KeyHint>
+              Shift + Enter for a new line · ⌘/Ctrl + Enter to send
+            </KeyHint>
+            <Button type="submit" variant="primary" className="mt-6">
+              Send Message
+            </Button>
+          </form>
+        )}
+      </div>
     </div>
   );
 }

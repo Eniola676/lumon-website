@@ -31,49 +31,46 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      {/* Discovery call CTA */}
+      {/* Conversational contact form + discovery call CTA, side by side */}
       <section className="bg-[#fbfbfb]">
         <Container className="py-16 sm:py-24">
-          <div className="rounded-3xl bg-[#070707] p-8 text-white sm:p-10">
-            <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-              <div>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[3fr_2fr] lg:gap-12">
+            <div>
+              <p className="font-mono text-xs tracking-wide text-gray-500 uppercase">
+                Tell us where it hurts
+              </p>
+              <h2 className="mt-3 text-3xl leading-[1.1] font-normal tracking-tight sm:text-4xl">
+                Takes about <em className="italic">a minute.</em>
+              </h2>
+              <div className="mt-8">
+                <ContactForm />
+              </div>
+            </div>
+
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <div className="rounded-3xl bg-[#070707] p-8 text-white sm:p-10">
                 <h2 className="text-2xl font-medium sm:text-3xl">
                   Discovery Call — 30 minutes.
                 </h2>
-                <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/60 sm:text-base">
+                <p className="mt-4 text-sm leading-relaxed text-white/60 sm:text-base">
                   The fastest way to know if we&rsquo;re a fit. We&rsquo;ll
                   talk about your business, what you&rsquo;re trying to
                   build, and whether Lumon Studios can help. If it&rsquo;s
                   not a fit, I&rsquo;ll tell you.
                 </p>
+                <div className="mt-8">
+                  <CalendlyButton variant="primary-invert">
+                    Book a Discovery Call
+                  </CalendlyButton>
+                </div>
               </div>
-              <CalendlyButton variant="primary-invert" className="shrink-0">
-                Book a Discovery Call
-              </CalendlyButton>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Conversational contact form */}
-      <section className="bg-white">
-        <Container className="py-16 sm:py-24">
-          <div className="mx-auto max-w-xl">
-            <p className="text-center font-mono text-xs tracking-wide text-gray-500 uppercase">
-              Or answer a few quick questions
-            </p>
-            <h2 className="mt-3 text-center text-3xl leading-[1.1] font-normal tracking-tight sm:text-4xl">
-              Takes about <em className="italic">a minute.</em>
-            </h2>
-            <div className="mt-10">
-              <ContactForm />
             </div>
           </div>
         </Container>
       </section>
 
       {/* Direct contact + response time + elsewhere */}
-      <section className="bg-[#fbfbfb]">
+      <section className="bg-white">
         <Container className="grid grid-cols-1 gap-12 py-16 sm:py-24 lg:grid-cols-3">
           <div>
             <h2 className="text-xl font-medium sm:text-2xl">
@@ -121,21 +118,21 @@ export default function ContactPage() {
             </h2>
             <div className="mt-5 flex items-center gap-5">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/lumon-studio/"
                 aria-label="LinkedIn"
                 className="text-gray-500 transition-colors hover:text-black"
               >
                 <LinkedinIcon className="size-5" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/lumonweb"
                 aria-label="Instagram"
                 className="text-gray-500 transition-colors hover:text-black"
               >
                 <InstagramIcon className="size-5" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/lumon-studio/"
                 aria-label="Twitter / X"
                 className="text-gray-500 transition-colors hover:text-black"
               >
