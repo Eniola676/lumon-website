@@ -30,7 +30,7 @@ export function MuxVideoCard({ name, role, videoUrl, poster, text, rating }: Mux
             aria-label={`Play testimonial from ${name}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={poster} alt="" className="absolute inset-0 h-full w-full object-cover" />
+            <img src={poster} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
             <span className="absolute inset-0 flex items-center justify-center">
               <span className="flex size-12 items-center justify-center rounded-full bg-white/90 text-black transition-transform group-hover:scale-110">

@@ -95,6 +95,7 @@ export function MarqueeLogoScroller({
                 <img
                   src={logo.src}
                   alt={logo.alt}
+                  loading="lazy"
                   className="relative h-8 w-auto object-contain grayscale transition-all duration-300 group-hover:grayscale-0"
                 />
               ) : (

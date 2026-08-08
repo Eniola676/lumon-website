@@ -25,6 +25,7 @@ export function AiSummaryLinks() {
             <img
               src={tool.icon}
               alt=""
+              loading="lazy"
               className="size-4 [filter:brightness(0)_invert(1)]"
             />
           </button>

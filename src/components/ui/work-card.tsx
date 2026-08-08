@@ -18,6 +18,7 @@ export function WorkCard({ name, title, image, href }: WorkItem) {
         <img
           src={image}
           alt={`${title} — ${name}`}
+          loading="lazy"
           className="h-[270px] w-full rounded-2xl object-cover object-top transition-all duration-300 group-hover:scale-105"
         />
         <div className="pointer-events-none absolute bottom-0 z-10 h-60 w-full bg-gradient-to-t from-black to-transparent" />

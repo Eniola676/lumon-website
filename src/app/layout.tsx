@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { CalendlyAssets } from "@/components/calendly-assets";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -32,13 +33,8 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${anonymousPro.variable} h-full antialiased`}
     >
-      <head>
-        <link
-          href="https://assets.calendly.com/assets/external/widget.css"
-          rel="stylesheet"
-        />
-      </head>
       <body className="flex min-h-full flex-col bg-white text-[#1d1f2c]">
+        <CalendlyAssets />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
