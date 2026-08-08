@@ -31,30 +31,23 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      {/* Book a call + form */}
+      {/* Discovery call CTA */}
       <section className="bg-[#fbfbfb]">
-        <Container className="grid grid-cols-1 gap-10 py-16 sm:py-24 lg:grid-cols-[3fr_2fr] lg:gap-16">
-          <div>
-            <h2 className="text-2xl font-medium sm:text-3xl">
-              Or use the form below.
-            </h2>
-            <div className="mt-8 max-w-xl">
-              <ContactForm />
-            </div>
-          </div>
-
+        <Container className="py-16 sm:py-24">
           <div className="rounded-3xl bg-[#070707] p-8 text-white sm:p-10">
-            <h2 className="text-2xl font-medium sm:text-3xl">
-              Discovery Call — 30 minutes.
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-white/60 sm:text-base">
-              The fastest way to know if we&rsquo;re a fit. We&rsquo;ll talk
-              about your business, what you&rsquo;re trying to build, and
-              whether Lumon Studios can help. If it&rsquo;s not a fit,
-              I&rsquo;ll tell you.
-            </p>
-            <div className="mt-8">
-              <CalendlyButton variant="primary-invert">
+            <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+              <div>
+                <h2 className="text-2xl font-medium sm:text-3xl">
+                  Discovery Call — 30 minutes.
+                </h2>
+                <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/60 sm:text-base">
+                  The fastest way to know if we&rsquo;re a fit. We&rsquo;ll
+                  talk about your business, what you&rsquo;re trying to
+                  build, and whether Lumon Studios can help. If it&rsquo;s
+                  not a fit, I&rsquo;ll tell you.
+                </p>
+              </div>
+              <CalendlyButton variant="primary-invert" className="shrink-0">
                 Book a Discovery Call
               </CalendlyButton>
             </div>
@@ -62,8 +55,25 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      {/* Direct contact + response time + elsewhere */}
+      {/* Conversational contact form */}
       <section className="bg-white">
+        <Container className="py-16 sm:py-24">
+          <div className="mx-auto max-w-xl">
+            <p className="text-center font-mono text-xs tracking-wide text-gray-500 uppercase">
+              Or answer a few quick questions
+            </p>
+            <h2 className="mt-3 text-center text-3xl leading-[1.1] font-normal tracking-tight sm:text-4xl">
+              Takes about <em className="italic">a minute.</em>
+            </h2>
+            <div className="mt-10">
+              <ContactForm />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Direct contact + response time + elsewhere */}
+      <section className="bg-[#fbfbfb]">
         <Container className="grid grid-cols-1 gap-12 py-16 sm:py-24 lg:grid-cols-3">
           <div>
             <h2 className="text-xl font-medium sm:text-2xl">
