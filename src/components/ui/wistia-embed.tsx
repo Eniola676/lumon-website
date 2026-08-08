@@ -17,10 +17,10 @@ export function WistiaEmbed({
 
   return (
     <div className={["bg-black", className].filter(Boolean).join(" ")}>
-      <Script src="https://fast.wistia.com/player.js" strategy="afterInteractive" />
+      <Script src="https://fast.wistia.com/player.js" strategy="lazyOnload" />
       <Script
         src={`https://fast.wistia.com/embed/${mediaId}.js`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         type="module"
       />
       <style>{`
