@@ -68,6 +68,20 @@ export async function getPosts({
   }
 }
 
+export async function getLatestPosts(limit = 3): Promise<Post[]> {
+  if (!sanityClient) return [];
+
+  try {
+    return await sanityClient.fetch<Post[]>(
+      `*[${PUBLISHED_FILTER}] | order(publishedAt desc) [0...$limit] { ${CARD_FIELDS} }`,
+      { limit }
+    );
+  } catch (err) {
+    console.error("getLatestPosts failed", err);
+    return [];
+  }
+}
+
 export async function getPostBySlug(slug: string): Promise<PostWithBody | null> {
   if (!sanityClient) return null;
 

@@ -9,7 +9,7 @@ import { AiSummaryLinks } from "@/components/ui/ai-summary-links";
 import { ShareLinks } from "@/components/blog/share-links";
 import { PostCard } from "@/components/blog/post-card";
 import { getPortableTextComponents } from "@/components/blog/portable-text-components";
-import { PinterestIcon } from "@/components/ui/social-icons";
+import { LinkedinIcon, PinterestIcon } from "@/components/ui/social-icons";
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/blog";
 import { getHeadingIds, getToc } from "@/lib/blog-content";
 import { formatPostDate } from "@/lib/format-date";
@@ -108,20 +108,22 @@ export default async function BlogPostPage({
       </section>
 
       <section className="bg-white">
-        <Container className="grid grid-cols-1 gap-10 pb-16 lg:grid-cols-[280px_1fr] lg:gap-16">
-          {/* Sidebar */}
-          <aside className="lg:sticky lg:top-28 lg:h-fit lg:self-start">
+        <Container className="grid grid-cols-1 gap-10 pb-16 lg:grid-cols-[240px_1fr_240px] lg:gap-10">
+          {/* Left sidebar */}
+          <aside className="lg:sticky lg:top-28 lg:h-fit lg:self-start lg:order-1">
             {toc.length > 0 && (
               <div className="rounded-2xl border border-[#e9e9ea] bg-[#fbfbfb] p-6">
                 <p className="font-mono text-xs tracking-wide text-gray-500 uppercase">
                   Table of contents
                 </p>
-                <ul className="mt-4 space-y-3">
+                <ul className="mt-4 divide-y divide-[#e9e9ea]">
                   {toc.map((item) => (
-                    <li key={item.id} className={item.level === 3 ? "pl-4" : ""}>
+                    <li key={item.id} className="py-2.5 first:pt-0 last:pb-0">
                       <a
                         href={`#${item.id}`}
-                        className="text-sm leading-snug text-gray-600 hover:text-black"
+                        className={`block text-sm leading-snug text-gray-600 hover:text-black ${
+                          item.level === 3 ? "pl-4" : ""
+                        }`}
                       >
                         {item.text}
                       </a>
@@ -146,7 +148,7 @@ export default async function BlogPostPage({
           </aside>
 
           {/* Article */}
-          <article>
+          <article className="lg:order-2">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <p className="font-mono text-xs tracking-wide text-gray-500 uppercase">
                 Last updated: {formatPostDate(post.publishedAt)}
@@ -179,7 +181,7 @@ export default async function BlogPostPage({
               />
             </div>
 
-            <div className="text-base leading-relaxed text-gray-700">
+            <div className="mt-10 text-base leading-relaxed text-gray-700">
               <PortableText value={post.body} components={components} />
             </div>
 
@@ -195,6 +197,33 @@ export default async function BlogPostPage({
               </a>
             )}
           </article>
+
+          {/* Right sidebar — author */}
+          <aside className="lg:sticky lg:top-28 lg:h-fit lg:self-start lg:order-3">
+            <div className="rounded-2xl border border-[#e9e9ea] bg-[#fbfbfb] p-6">
+              <div className="flex size-12 items-center justify-center rounded-full bg-black text-sm font-medium text-white">
+                TO
+              </div>
+              <p className="mt-4 text-lg font-medium">Tobi Ojetoyinbo</p>
+              <p className="text-sm text-gray-500">Founder, Lumon Studios</p>
+              <p className="mt-4 text-sm leading-relaxed text-gray-600">
+                Tobi builds course platforms, funnels, and back-office
+                systems for coaches and consultants. After years of shipping
+                course sites that looked great but didn&rsquo;t sell, he
+                started Lumon Studios to fix the machinery behind the
+                storefront.
+              </p>
+              <a
+                href="https://www.linkedin.com/company/lumon-studio/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-black"
+              >
+                <LinkedinIcon className="size-4" />
+                LinkedIn
+              </a>
+            </div>
+          </aside>
         </Container>
       </section>
 
