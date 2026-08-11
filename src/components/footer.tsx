@@ -13,6 +13,7 @@ const PROGRAMS = [
 
 const COMPANY = [
   { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -90,21 +91,21 @@ export function Footer() {
         <p>© 2026 Lumon Studios. All rights reserved.</p>
         <div className="flex items-center gap-4">
           <a
-            href="#"
+            href="https://www.linkedin.com/company/lumon-studio/"
             aria-label="LinkedIn"
             className="transition-colors hover:text-white"
           >
             <LinkedinIcon className="size-4" />
           </a>
           <a
-            href="#"
+            href="https://www.instagram.com/lumonweb"
             aria-label="Instagram"
             className="transition-colors hover:text-white"
           >
             <InstagramIcon className="size-4" />
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/company/lumon-studio/"
             aria-label="Twitter / X"
             className="transition-colors hover:text-white"
           >
