@@ -1,0 +1,37 @@
+# Lumon Studios
+
+Lumon Studios is a specialist web studio that builds course systems, sales funnels, websites, and automation infrastructure for coaches, consultants, and training organisations. Founded by Tobi, an Electrical & Electronics Engineer with 100+ course platform builds across Kajabi, Thinkific, Teachable, GoHighLevel, WordPress, and Webflow. The studio operates three distinct service tiers: Launch (first-time course creators), Scale (established coaches consolidating tools), and Enterprise (whitelabel builds for agencies and HR/L&D firms). Clients span the US, UK, Canada, and Australia.
+
+## Core Pages
+
+- [Homepage](https://www.lumonstudio.xyz/): Overview of Lumon Studios' value proposition, service tiers, client logos, featured work, testimonials, and ideal client profile.
+- [About](https://www.lumonstudio.xyz/about): Studio origin story, founding principles, team philosophy (small, senior, no handoffs), and track record (100+ builds, international clients, engineering background).
+- [Contact](https://www.lumonstudio.xyz/contact): Contact form, 30-minute discovery call booking via Calendly, direct email (tobi@lumonstudio.xyz), LinkedIn, and response time commitment (one business day).
+
+## Services
+
+- [Lumon Launch](https://www.lumonstudio.xyz/launch): Done-for-you course launch package for first-time course creators. Includes course site, payment infrastructure (Stripe/PayPal), basic automation (email sequences, lead capture), and launch handoff. From $1,500, delivered in 14 days.
+- [Lumon Scale](https://www.lumonstudio.xyz/scale): Full systems rebuild for coaches at $10k+/month. Includes systems audit, CRM architecture (HubSpot, GoHighLevel), pipeline design, automation build, website upgrade (Webflow/WordPress), and zero-downtime migration. From $6,500, delivered in 6 weeks.
+- [Lumon Enterprise](https://www.lumonstudio.xyz/enterprise): Whitelabel course systems and learning platforms for HR consultancies, L&D firms, and agencies. Full NDA and whitelabel agreement, source file delivery, no client-facing attribution. Projects from $8,000, retainers from $2,000/month.
+
+## Blog & Resources
+
+- [Blog](https://www.lumonstudio.xyz/blog): Articles on course systems, automation strategy, coaching business operations, and platform comparisons. Content managed via Sanity CMS.
+
+## Key Business Facts
+
+- Platforms built on: Kajabi, Thinkific, Teachable, GoHighLevel, Webflow, WordPress, and custom solutions.
+- Target clients: Coaches, consultants, therapists, course creators, HR consulting firms, L&D consultancies, corporate training providers, coaching agencies, and digital marketing agencies.
+- Differentiators: No junior handoffs, no offshore chains, the person you speak with builds your project. Full asset ownership — every account, file, and login belongs to the client.
+- Capacity: Maximum three concurrent Enterprise engagements at any time.
+- Contact email: tobi@lumonstudio.xyz
+
+## Social Profiles
+
+- [LinkedIn](https://www.linkedin.com/company/lumon-studio/): Official company LinkedIn page.
+- [Instagram](https://www.instagram.com/lumonweb): Official Instagram profile.
+
+## Optional
+
+- [Blog Category Pages](https://www.lumonstudio.xyz/blog/category/): Filtered blog listings by topic category.
+- [Blog Pagination](https://www.lumonstudio.xyz/blog/page/2): Paginated blog archive for browsing older posts.
