@@ -13,6 +13,7 @@ export async function generateMetadata({
   return {
     title: `${name} — Blog — Lumon Studios`,
     description: `Articles about ${name} from Lumon Studios.`,
+    alternates: { canonical: `/blog/category/${category}` },
   };
 }
 

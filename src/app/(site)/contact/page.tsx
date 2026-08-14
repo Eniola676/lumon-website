@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Contact — Lumon Studios",
   description:
     "Book a discovery call or send a note. Lumon Studios responds within one business day.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

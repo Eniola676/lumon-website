@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
 import { CalendlyButton } from "@/components/ui/calendly-button";
 import { NumberedList } from "@/components/ui/numbered-list";
@@ -12,6 +13,13 @@ import { TestimonialWall } from "@/components/testimonial-wall";
 import { PLATFORM_LOGOS } from "@/lib/platform-logos";
 import { CLIENTS } from "@/lib/clients";
 import { HOME_FEATURES } from "@/lib/feature-sections";
+
+export const metadata: Metadata = {
+  title: "Lumon Studios — Course systems for coaches who mean business.",
+  description:
+    "Custom-built platforms, funnels, and websites for coaches, consultants, and training organisations. No templates. No handoffs. Just work that quietly does its job.",
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (

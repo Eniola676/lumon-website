@@ -13,6 +13,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Canonicalize on www — search engines were seeing lumonstudio.xyz and
+  // www.lumonstudio.xyz as two separate sites. permanent:true emits a 308,
+  // which browsers/search engines treat identically to a 301 (Next.js
+  // doesn't support literal 301s — see the redirects() docs).
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "lumonstudio.xyz" }],
+        destination: "https://www.lumonstudio.xyz/:path*",
+        permanent: true,
+      },
+    ];
+  },
   // PostHog reverse proxy — routes analytics through our own domain so
   // ad blockers don't strip event capture. Switch us.* to eu.* below if
   // the PostHog project is on the EU cloud.

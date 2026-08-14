@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "About — Lumon Studios",
   description:
     "Lumon Studios is a small, focused studio building course systems, funnels, and websites for coaches, consultants, and training organisations.",
+  alternates: { canonical: "/about" },
 };
 
 const PRINCIPLES = [

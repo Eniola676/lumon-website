@@ -4,11 +4,19 @@ import { BlogListing } from "@/components/blog/blog-listing";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Blog — Lumon Studios",
-  description:
-    "Notes on course systems, automation, and running the business side of coaching.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ page: string }>;
+}): Promise<Metadata> {
+  const { page } = await params;
+  return {
+    title: "Blog — Lumon Studios",
+    description:
+      "Notes on course systems, automation, and running the business side of coaching.",
+    alternates: { canonical: `/blog/page/${page}` },
+  };
+}
 
 export default async function BlogPagePaginated({
   params,

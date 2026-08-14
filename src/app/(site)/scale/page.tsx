@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Lumon Scale — Lumon Studios",
   description:
     "Consolidate your scattered tools into one clean system. From $6,500.",
+  alternates: { canonical: "/scale" },
 };
 
 export default function ScalePage() {

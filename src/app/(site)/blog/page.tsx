@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Blog — Lumon Studios",
   description:
     "Notes on course systems, automation, and running the business side of coaching.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogPage() {

@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Lumon Launch — Lumon Studios",
   description:
     "Everything you need to sell your first course — built in 14 days. From $1,500.",
+  alternates: { canonical: "/launch" },
 };
 
 export default function LaunchPage() {
