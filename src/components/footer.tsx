@@ -17,11 +17,18 @@ const COMPANY = [
   { href: "/contact", label: "Contact" },
 ];
 
+// Not built yet — shown as a preview of what's coming, not linked anywhere.
+const TOOLS = [
+  "Course Pricing Calculator",
+  "ROI Calculator",
+  "Launch Readiness Quiz",
+];
+
 export function Footer() {
   return (
     <KineticGrid as="footer" className="border-t border-[#1f1f1f] text-white">
       <Container className="relative z-10 py-16 sm:py-20">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link
               href="/"
@@ -45,6 +52,23 @@ export function Footer() {
                   >
                     {item.label}
                   </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-white">Tools</h3>
+            <ul className="mt-4 space-y-3">
+              {TOOLS.map((label) => (
+                <li
+                  key={label}
+                  className="flex items-center gap-2 text-sm text-white/40"
+                >
+                  {label}
+                  <span className="rounded-full border border-white/15 px-2 py-0.5 font-mono text-[0.625rem] tracking-wide text-white/40 uppercase">
+                    Soon
+                  </span>
                 </li>
               ))}
             </ul>

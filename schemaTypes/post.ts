@@ -51,6 +51,17 @@ export const post = defineType({
       name: "category",
       title: "Category",
       type: "string",
+      options: {
+        list: [
+          "Sales Funnels",
+          "Course Platforms",
+          "Automation",
+          "Marketing",
+          "Systems & Operations",
+          "Case Studies",
+        ],
+        layout: "dropdown",
+      },
     }),
     defineField({
       name: "pinterestUrl",

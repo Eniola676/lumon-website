@@ -68,34 +68,34 @@ export const HOME_FEATURES: FeatureSectionContent = {
 
 export const LAUNCH_FEATURES: FeatureSectionContent = {
   eyebrow: "Inside the Launch",
-  headline: "Everything you need to get your first sale.",
+  headline: "Everything a first sale actually requires.",
   subhead:
-    "Building the course is the easy part. Getting people to notice it, trust it, and buy it — that's what actually matters. Every Launch build includes the pieces that turn a new course into an early revenue engine.",
+    "Recording lessons is maybe 20% of a launch. The other 80% is the machine around them: the page that sells, the platform that delivers, the emails that follow up. Every Launch build includes all of it.",
   tiles: [
     {
       icon: Globe,
-      title: "A course site that closes the sale.",
-      body: "Not a page. A full site — hero, promise, curriculum, testimonials, FAQ, checkout. Everything a first-time buyer needs to click Buy without hesitating.",
+      title: "A course site built to sell, not just exist.",
+      body: "Hero, offer, curriculum, testimonials, FAQ, checkout. A first-time buyer lands, understands what they're getting, and pays without a single confused moment. That's the whole job of the page.",
     },
     {
       icon: GraduationCap,
-      title: "Your course, structured for retention.",
-      body: "Modules, lessons, drip schedules — organised so students actually finish. Because completion drives testimonials, and testimonials drive your next ten sales.",
+      title: "Your course, structured so students finish.",
+      body: "Modules, lessons, and drip schedules arranged for completion. Finished students leave testimonials. Testimonials sell the next cohort. Most course creators skip this and wonder why nobody reviews them.",
     },
     {
       icon: Sparkles,
-      title: "Turn slides into pro-level videos.",
-      body: "AI avatar videos from your slides, notes, or scripts. Studio-quality lessons without spending forty hours in front of a camera. Ideal for first-time creators who want polish, not production headaches.",
+      title: "AI avatar videos, so you never film a thing.",
+      body: "I turn your slides, notes, or scripts into presenter-led video lessons using AI avatars. No camera, no studio, no re-recording lesson 4 for the fifth time. If the reason you haven't launched is “I hate filming myself,” this removes it.",
     },
     {
       icon: Megaphone,
-      title: "The 30-minute-a-day audience engine.",
-      body: "You don't have traffic yet. That's the real problem. Record 30 minutes a day using scripts we write for you — we turn it into 6 ready-to-post videos per day on your Instagram. In 60 days, you have an audience that knows you before you ever pitch them.",
+      title: "An audience engine that runs on 30 minutes a day.",
+      body: "No audience yet? That's the real bottleneck, not the tech. You record 30 minutes daily from scripts I write. I turn that into 6 ready-to-post short videos for your Instagram every day. After 60 days, people know you before you ever pitch them.",
     },
     {
       icon: Mail,
-      title: "Sales sequences that convert the audience you build.",
-      body: "Welcome emails. Waitlist nurture. Launch sequences. Post-purchase upsells. All written and automated — so the second someone joins your list, they're being sold to properly, not forgotten.",
+      title: "Email sequences that do the selling while you sleep.",
+      body: "Welcome emails, waitlist nurture, launch sequence, post-purchase upsell. Written and automated, so nobody joins your list and gets forgotten.",
     },
   ],
   ctaHeadline: "The system, not just the course.",
@@ -106,34 +106,34 @@ export const LAUNCH_FEATURES: FeatureSectionContent = {
 
 export const SCALE_FEATURES: FeatureSectionContent = {
   eyebrow: "Inside the Rebuild",
-  headline: "Everything you need to scale without breaking.",
+  headline: "A system that can hold what's coming next.",
   subhead:
-    "You already have revenue. What you don't have is a system that can hold what's coming next. Every Scale engagement rebuilds the foundation so your growth stops fighting your infrastructure.",
+    "You have revenue. You don't have infrastructure that matches it. Every Scale engagement rebuilds the foundation so you stop patching symptoms.",
   tiles: [
     {
       icon: Globe,
       title: "A website that matches your level.",
-      body: "The site you built in Year 1 is quietly costing you deals. Custom rebuild on Webflow or WordPress, positioned for who you are now — not who you were when you started.",
+      body: "The site you built in year one is quietly costing you deals with the clients you want now. Custom rebuild on Webflow or WordPress, positioned for who you are today, wired into the new CRM.",
     },
     {
       icon: RefreshCw,
-      title: "Migration without downtime.",
-      body: "Move your students, contacts, and course data from wherever it lives now — into a system that actually works. Old system runs until the new one is verified. No lost data. No angry students. No broken checkouts.",
+      title: "Migration without losing a single student.",
+      body: "If you've migrated before and lost data, I understand why you're scared to touch anything. Here's how this one works: the old system keeps running until the new one is verified end to end. Nobody loses access, and no checkout breaks mid-switch.",
     },
     {
       icon: LayoutDashboard,
       title: "One dashboard. Every lead. Every sale.",
-      body: "HubSpot, GoHighLevel, or the CRM that fits your business — set up so your team stops copy-pasting between tools. Automated lead scoring. Real pipelines. Reports you can actually trust.",
+      body: "HubSpot, GoHighLevel, or whichever CRM actually fits your business, set up so your team stops living in copy-paste. Lead scoring, real pipelines, reports you can trust when you're planning next quarter.",
     },
     {
       icon: Workflow,
-      title: "The full pipeline architecture, rebuilt from scratch.",
-      body: "Lead pipeline. Student pipeline. Retention pipeline. Every stage of your buyer's journey — mapped, automated, and visible in real time. So you finally know which channels bring the buyers and which just bring the noise.",
+      title: "Your full pipeline, rebuilt from scratch.",
+      body: "Lead pipeline, student pipeline, retention pipeline. Every stage mapped, automated, and visible. You finally see which channels bring buyers and which just bring noise.",
     },
     {
       icon: Zap,
-      title: "Automation that replaces three hires.",
-      body: "Welcome sequences. Behavioural triggers. Internal alerts when a lead hits a scoring threshold. Post-purchase onboarding. The kind of infrastructure that lets a $30k/month business run without doubling headcount.",
+      title: "Email automation that replaces hires, not just Zaps.",
+      body: "Welcome sequences, cart abandonment, behavioural triggers, internal alerts when a lead crosses a scoring threshold, post-purchase onboarding. Wired together properly, not stacked on 40 fragile Zaps.",
     },
   ],
   ctaHeadline: "Stop patching. Start building.",

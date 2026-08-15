@@ -101,6 +101,41 @@ export function OfferPage({
         </section>
       )}
 
+      {/* Industries served (Enterprise) */}
+      {offer.industriesServed && (
+        <section className="bg-[#fbfbfb]">
+          <Container className="py-16 sm:py-24">
+            <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
+              {offer.industriesHeading}
+            </h2>
+            {offer.industriesIntro && (
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 sm:text-lg">
+                {offer.industriesIntro}
+              </p>
+            )}
+            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {offer.industriesServed.map((industry) => {
+                const Icon = industry.icon;
+                return (
+                  <div
+                    key={industry.title}
+                    className="rounded-2xl border border-[#e9e9ea] bg-white p-6"
+                  >
+                    <div className="flex size-10 items-center justify-center rounded-full border border-[#e9e9ea] bg-[#fbfbfb]">
+                      <Icon className="size-4.5" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="mt-5 text-lg font-medium">{industry.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                      {industry.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </Container>
+        </section>
+      )}
+
       {/* Timeline */}
       {offer.timelineItems && (
         <section className="bg-white">

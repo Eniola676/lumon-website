@@ -5,7 +5,7 @@ import { OFFERS } from "@/lib/offers";
 export const metadata: Metadata = {
   title: "Lumon Enterprise — Lumon Studios",
   description:
-    "Whitelabel course systems and learning platforms — built under your brand. Projects from $8,000.",
+    "Whitelabel learning platforms and course systems for agencies, HR/L&D consultancies, SaaS teams, and CE providers — built under your brand, NDA-protected. Projects from $8,000.",
   alternates: { canonical: "/enterprise" },
 };
 
