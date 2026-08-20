@@ -11,7 +11,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { page } = await params;
   return {
-    title: "Blog — Lumon Studios",
+    title: `Blog — Page ${page} — Lumon Studios`,
     description:
       "Notes on course systems, automation, and running the business side of coaching.",
     alternates: { canonical: `/blog/page/${page}` },
