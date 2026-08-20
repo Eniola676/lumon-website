@@ -21,4 +21,6 @@ https://www.webstacks.com/blog/best-headless-cms
 
 - Adding hero videos to offer pages hero section.
 
+- add before/after phasetrax casestudy
+
 

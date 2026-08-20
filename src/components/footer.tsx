@@ -15,14 +15,15 @@ const COMPANY = [
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
+  { href: "/privacy-policy", label: "Privacy Policy" },
+];
+
+const TOOLS_LIVE = [
+  { href: "/tools/online-course-price-calculator", label: "Course Pricing Calculator" },
 ];
 
 // Not built yet — shown as a preview of what's coming, not linked anywhere.
-const TOOLS = [
-  "Course Pricing Calculator",
-  "ROI Calculator",
-  "Launch Readiness Quiz",
-];
+const TOOLS_SOON = ["ROI Calculator", "Launch Readiness Quiz"];
 
 export function Footer() {
   return (
@@ -60,7 +61,17 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-white">Tools</h3>
             <ul className="mt-4 space-y-3">
-              {TOOLS.map((label) => (
+              {TOOLS_LIVE.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-white/60 transition-colors hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+              {TOOLS_SOON.map((label) => (
                 <li
                   key={label}
                   className="flex items-center gap-2 text-sm text-white/40"
