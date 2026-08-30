@@ -1,20 +1,15 @@
-// Delivery for course-calculator leads. Not wired to Zoho yet — this is a
-// placeholder so /api/course-calculator-lead has something real to call.
-// Swap the body of sendCourseCalculatorLead() for one of:
+// Delivery for course-calculator leads — adds the contact to the "Course
+// Calculator Leads" list in Zoho Campaigns, with the quiz answers as custom
+// fields. A Zoho Autoresponder configured on that list (Campaigns UI, not
+// code) sends the actual roadmap-email sequence when a contact lands on it.
 //
-//   - Zoho Mail SMTP: send via nodemailer using host smtp.zoho.com (or
-//     smtp.zoho.eu), a Zoho Mail address, and an app-specific password
-//     (Zoho Mail → Settings → Security → App Passwords). Needs env vars
-//     ZOHO_SMTP_HOST, ZOHO_SMTP_USER, ZOHO_SMTP_APP_PASSWORD.
-//   - Zoho Campaigns: POST the lead to the Campaigns "add contact to list"
-//     API with the quiz answers as custom merge fields, so an autoresponder
-//     workflow sends the roadmap email. Needs a Zoho API console app
-//     (client id/secret) + refresh token + list key.
-//   - Zoho CRM: create a Lead record via the CRM API with the answers as
-//     custom fields, for manual follow-up. Needs CRM OAuth credentials.
-//
-// Until one of those is wired in, this just logs server-side so submissions
-// aren't silently dropped — check your hosting provider's function logs.
+// Field names below must exactly match custom fields created on that list
+// in Zoho Campaigns (Contacts → Manage Fields) — unrecognized keys are
+// silently dropped by Zoho's API rather than rejected.
+import { addContactToZohoList } from "@/lib/zoho-campaigns";
+
+const CALCULATOR_LIST_KEY = process.env.ZOHO_CAMPAIGNS_CALCULATOR_LIST_KEY;
+
 export type CourseCalculatorLead = {
   firstName: string;
   email: string;
@@ -29,6 +24,25 @@ export type CourseCalculatorLead = {
 };
 
 export async function sendCourseCalculatorLead(lead: CourseCalculatorLead): Promise<void> {
-  // TODO: replace with a real Zoho integration (see options above).
-  console.log("[course-calculator-lead] received (not yet delivered to Zoho):", lead);
+  if (!CALCULATOR_LIST_KEY) {
+    throw new Error("ZOHO_CAMPAIGNS_CALCULATOR_LIST_KEY is not configured.");
+  }
+
+  const response = await addContactToZohoList({
+    listKey: CALCULATOR_LIST_KEY,
+    email: lead.email,
+    firstName: lead.firstName,
+    fields: {
+      "Course Format": lead.format,
+      "Course Category": lead.category,
+      "Access Level": lead.access,
+      "Outcome Type": lead.outcomeType,
+      "Proof Score": lead.proofScore,
+      "Price Low": lead.low,
+      "Price High": lead.high,
+      "Suggested Price": lead.anchor,
+    },
+  });
+
+  console.log("[course-calculator-lead] added to Zoho Campaigns:", response);
 }

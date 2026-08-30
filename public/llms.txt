@@ -6,7 +6,7 @@ Lumon Studios is a specialist web studio that builds course systems, sales funne
 
 - [Homepage](https://www.lumonstudio.xyz/): Overview of Lumon Studios' value proposition, service tiers, client logos, featured work, testimonials, and ideal client profile.
 - [About](https://www.lumonstudio.xyz/about): Studio origin story, founding principles, team philosophy (small, senior, no handoffs), and track record (100+ builds, international clients, engineering background).
-- [Contact](https://www.lumonstudio.xyz/contact): Contact form, 30-minute discovery call booking via Calendly, direct email (tobi@lumonstudio.xyz), LinkedIn, and response time commitment (one business day).
+- [Contact](https://www.lumonstudio.xyz/contact): Contact form, 30-minute discovery call booking via Calendly, direct email (tobi@lumonstudiomail.com), LinkedIn, and response time commitment (one business day).
 
 ## Services
 
@@ -24,7 +24,7 @@ Lumon Studios is a specialist web studio that builds course systems, sales funne
 - Target clients: Coaches, consultants, therapists, course creators, HR consulting firms, L&D consultancies, corporate training providers, coaching agencies, and digital marketing agencies.
 - Differentiators: No junior handoffs, no offshore chains, the person you speak with builds your project. Full asset ownership — every account, file, and login belongs to the client.
 - Capacity: Maximum three concurrent Enterprise engagements at any time.
-- Contact email: tobi@lumonstudio.xyz
+- Contact email: tobi@lumonstudiomail.com
 
 ## Social Profiles
 

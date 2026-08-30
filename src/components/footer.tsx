@@ -40,6 +40,12 @@ export function Footer() {
             <p className="mt-4 max-w-[26ch] text-sm text-white/50">
               Course systems for coaches who mean business.
             </p>
+            <a
+              href="mailto:tobi@lumonstudiomail.com"
+              className="mt-4 block text-sm text-white/60 transition-colors hover:text-white"
+            >
+              tobi@lumonstudiomail.com
+            </a>
           </div>
 
           <div>

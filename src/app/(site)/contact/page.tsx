@@ -87,7 +87,7 @@ export default function ContactPage() {
                   Email
                 </dt>
                 <dd className="mt-1 text-sm text-gray-700">
-                  <a href="mailto:tobi@lumonstudio.xyz" className="underline hover:text-black transition-colors">tobi@lumonstudio.xyz</a>
+                  <a href="mailto:tobi@lumonstudiomail.com" className="underline hover:text-black transition-colors">tobi@lumonstudiomail.com</a>
                 </dd>
               </div>
               <div>

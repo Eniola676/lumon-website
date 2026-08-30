@@ -13,7 +13,7 @@ import { gsap } from "gsap";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const CONTACT_EMAIL = "tobi@lumonstudio.xyz";
+const CONTACT_EMAIL = "tobi@lumonstudiomail.com";
 
 const PAIN_OPTIONS = [
   "My website isn't built to convert.",
@@ -216,6 +216,19 @@ export function ContactForm() {
       "Project details:",
       message || "(not provided)",
     ].join("\n");
+
+    // Fire-and-forget: adds the lead to Zoho Campaigns' contact list.
+    // keepalive lets this finish even if mailto: below causes the tab to
+    // lose focus. The actual message content still goes to CONTACT_EMAIL
+    // via mailto — this is just for keeping a lead list.
+    fetch("/api/contact-lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email }),
+      keepalive: true,
+    }).catch(() => {
+      // Non-critical — the mailto below still carries the actual inquiry.
+    });
 
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
       subject
