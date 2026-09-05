@@ -13,7 +13,10 @@ import { Stars } from "@/components/ui/stars";
 import { TestimonialWall } from "@/components/testimonial-wall";
 import { PLATFORM_LOGOS } from "@/lib/platform-logos";
 import { CLIENTS } from "@/lib/clients";
+import { getFeaturedCaseStudies, caseStudyToWorkItem } from "@/lib/case-studies";
 import { HOME_FEATURES } from "@/lib/feature-sections";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Lumon Studios — Course systems for coaches who mean business.",
@@ -22,7 +25,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-export default function Home() {
+export default async function Home() {
+  const caseStudies = await getFeaturedCaseStudies();
+  const workItems = caseStudies.length > 0 ? caseStudies.map(caseStudyToWorkItem) : CLIENTS;
+
   return (
     <>
       {/* Hero */}
@@ -158,8 +164,8 @@ export default function Home() {
             across the US, UK, and beyond.
           </p>
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {CLIENTS.map((client) => (
-              <WorkCard key={client.name} {...client} />
+            {workItems.map((item) => (
+              <WorkCard key={item.href} {...item} />
             ))}
           </div>
         </Container>

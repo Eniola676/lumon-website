@@ -11,6 +11,7 @@
 // the old URL, resubmit it there at the new /sitemap1.xml address.
 import { SITE_URL } from "@/lib/site";
 import { getCategories, getSitemapPosts } from "@/lib/blog";
+import { getSitemapCaseStudies } from "@/lib/case-studies";
 
 export const revalidate = 3600;
 
@@ -34,6 +35,7 @@ const PAGES: Array<{ path: string; changeFrequency: ChangeFreq; priority: number
   { path: "/enterprise", changeFrequency: "monthly", priority: 0.9 },
   { path: "/tools/online-course-price-calculator", changeFrequency: "monthly", priority: 0.8 },
   { path: "/blog", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/case-studies", changeFrequency: "weekly", priority: 0.8 },
   { path: "/about", changeFrequency: "monthly", priority: 0.6 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.7 },
   { path: "/privacy-policy", changeFrequency: "yearly", priority: 0.3 },
@@ -77,9 +79,13 @@ export async function GET() {
     priority,
   }));
 
-  // Posts and categories are sourced live from Sanity so new content gets
-  // discovered without a manual sitemap update.
-  const [posts, categories] = await Promise.all([getSitemapPosts(), getCategories()]);
+  // Posts, categories, and case studies are sourced live from Sanity so new
+  // content gets discovered without a manual sitemap update.
+  const [posts, categories, caseStudies] = await Promise.all([
+    getSitemapPosts(),
+    getCategories(),
+    getSitemapCaseStudies(),
+  ]);
 
   const postEntries: Entry[] = posts.map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
@@ -95,7 +101,14 @@ export async function GET() {
     priority: 0.5,
   }));
 
-  const xml = toXml([...pages, ...categoryEntries, ...postEntries]);
+  const caseStudyEntries: Entry[] = caseStudies.map((caseStudy) => ({
+    url: `${SITE_URL}/case-studies/${caseStudy.slug}`,
+    lastModified: caseStudy.publishedAt,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  const xml = toXml([...pages, ...categoryEntries, ...postEntries, ...caseStudyEntries]);
 
   return new Response(xml, {
     headers: { "Content-Type": "application/xml" },

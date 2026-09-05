@@ -5,25 +5,24 @@ import { Checklist } from "@/components/ui/checklist";
 import { PriceCard } from "@/components/ui/price-card";
 import { AddOnsBento } from "@/components/ui/addons-bento";
 import { PortfolioPanel } from "@/components/ui/portfolio-panel";
-import { WorkCard } from "@/components/ui/work-card";
+import { WorkCard, type WorkItem } from "@/components/ui/work-card";
 import { KineticGrid } from "@/components/ui/kinetic-grid";
 import { FeatureSection } from "@/components/ui/feature-section";
 import { Faq } from "@/components/ui/faq";
 import { ClosingCta } from "@/components/ui/closing-cta";
 import { TestimonialWall } from "@/components/testimonial-wall";
 import type { OfferContent } from "@/lib/offers";
-import type { Client } from "@/lib/clients";
 import type { FeatureSectionContent } from "@/lib/feature-sections";
 
 export function OfferPage({
   offer,
   showTestimonialWall = false,
-  caseStudyClients,
+  proofWorkItems,
   featureSection,
 }: {
   offer: OfferContent;
   showTestimonialWall?: boolean;
-  caseStudyClients?: Client[];
+  proofWorkItems?: WorkItem[];
   featureSection?: FeatureSectionContent;
 }) {
   return (
@@ -178,10 +177,10 @@ export function OfferPage({
               <em className="italic">{offer.proofEmphasis}</em>
             </h2>
             <div className="mt-10">
-              {caseStudyClients ? (
+              {proofWorkItems && proofWorkItems.length > 0 ? (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {caseStudyClients.map((client) => (
-                    <WorkCard key={client.name} {...client} />
+                  {proofWorkItems.map((item) => (
+                    <WorkCard key={item.href} {...item} />
                   ))}
                 </div>
               ) : (

@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: "/launch", label: "Launch" },
   { href: "/scale", label: "Scale" },
   { href: "/enterprise", label: "Enterprise" },
+  { href: "/case-studies", label: "Work" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },

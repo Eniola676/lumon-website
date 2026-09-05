@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { OfferPage } from "@/components/offer-page";
 import { OFFERS } from "@/lib/offers";
 import { CASE_STUDY_CLIENTS } from "@/lib/clients";
+import { getCaseStudiesByOffer, caseStudyToWorkItem } from "@/lib/case-studies";
 import { LAUNCH_FEATURES } from "@/lib/feature-sections";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Lumon Launch — Lumon Studios",
@@ -11,12 +14,18 @@ export const metadata: Metadata = {
   alternates: { canonical: "/launch" },
 };
 
-export default function LaunchPage() {
+export default async function LaunchPage() {
+  const caseStudies = await getCaseStudiesByOffer("launch");
+  const proofWorkItems =
+    caseStudies.length > 0
+      ? caseStudies.map(caseStudyToWorkItem)
+      : [CASE_STUDY_CLIENTS[0], CASE_STUDY_CLIENTS[1]];
+
   return (
     <OfferPage
       offer={OFFERS.launch}
       showTestimonialWall
-      caseStudyClients={[CASE_STUDY_CLIENTS[0], CASE_STUDY_CLIENTS[1]]}
+      proofWorkItems={proofWorkItems}
       featureSection={LAUNCH_FEATURES}
     />
   );
