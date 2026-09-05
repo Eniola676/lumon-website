@@ -7,7 +7,7 @@ import { SCALE_FEATURES } from "@/lib/feature-sections";
 export const metadata: Metadata = {
   title: "Lumon Scale — Lumon Studios",
   description:
-    "Rebuild your coaching business's tech stack — CRM, pipelines, automation, and website — in 6 weeks with zero downtime. For coaches doing $10k+/month. From $6,500.",
+    "A premium website rebuild + full course system integration for established coaches doing $10k+/month. CRM, pipelines, and automation — in 6 weeks with zero downtime. From $7,500.",
   alternates: { canonical: "/scale" },
 };
 

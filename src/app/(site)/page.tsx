@@ -9,6 +9,7 @@ import { MarqueeLogoScroller } from "@/components/ui/marquee-logo-scroller";
 import { AiSummaryLinks } from "@/components/ui/ai-summary-links";
 import { BlogSection } from "@/components/ui/blog-section";
 import { FeatureSection } from "@/components/ui/feature-section";
+import { Stars } from "@/components/ui/stars";
 import { TestimonialWall } from "@/components/testimonial-wall";
 import { PLATFORM_LOGOS } from "@/lib/platform-logos";
 import { CLIENTS } from "@/lib/clients";
@@ -53,10 +54,19 @@ export default function Home() {
           <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
             The infrastructure behind coaching businesses that actually make money.
           </p>
-          <div className="mt-10 flex justify-center">
+          <div className="mt-10 flex flex-col items-center gap-3">
             <CalendlyButton variant="primary-invert">
               Book a Discovery Call
             </CalendlyButton>
+            <a
+              href="https://www.fiverr.com/toby_techy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-white/85 transition-colors hover:text-white"
+            >
+              <Stars count={5} className="text-white" />
+              <span className="underline underline-offset-2">5.0 rated on Fiverr</span>
+            </a>
           </div>
         </Container>
       </section>
@@ -87,21 +97,21 @@ export default function Home() {
               items={[
                 {
                   title: "Lumon Launch",
-                  meta: "From $1,500",
+                  meta: "From $2,500",
                   description:
-                    "For coaches launching their first course. Everything you need to sell — in 14 days.",
+                    "A professional website + course launch system, for experts launching their first paid program — in 14 days.",
                   href: "/launch",
                 },
                 {
                   title: "Lumon Scale",
-                  meta: "From $6,500",
+                  meta: "From $7,500",
                   description:
-                    "For established coaches at $10k+/month. Consolidate your tools into one clean system — in 6 weeks.",
+                    "A premium website rebuild + full course system integration, for established coaches at $10k+/month — in 6 weeks.",
                   href: "/scale",
                 },
                 {
                   title: "Lumon Enterprise",
-                  meta: "From $8,000 per project",
+                  meta: "From $10,000 per project",
                   description:
                     "Whitelabel builds for HR firms, L&D consultancies, and agencies. Your brand. Your credit.",
                   href: "/enterprise",

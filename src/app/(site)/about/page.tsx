@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { NumberedList } from "@/components/ui/numbered-list";
 import { ClosingCta } from "@/components/ui/closing-cta";
@@ -61,15 +62,27 @@ export default function AboutPage() {
     <>
       {/* Page hero */}
       <section className="bg-white">
-        <Container className="grid grid-cols-1 gap-8 pt-36 pb-20 sm:pt-44 sm:pb-28 lg:grid-cols-2 lg:gap-16">
-          <h1 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl lg:text-6xl">
-            Built for coaches who <em className="italic">take the work seriously.</em>
-          </h1>
-          <p className="text-base leading-relaxed text-gray-600 sm:text-lg">
-            Lumon Studios is a small, focused studio building course systems,
-            funnels, and websites for coaches, consultants, and training
-            organisations.
-          </p>
+        <Container className="grid grid-cols-1 items-center gap-10 pt-36 pb-20 sm:pt-44 sm:pb-28 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <h1 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl lg:text-6xl">
+              Built for coaches who <em className="italic">take the work seriously.</em>
+            </h1>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-600 sm:text-lg">
+              Lumon Studios is a small, focused studio building course
+              systems, funnels, and websites for coaches, consultants, and
+              training organisations.
+            </p>
+          </div>
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
+            <Image
+              src="/team/tobi-speaking.jpg"
+              alt="Tobi Ojet speaking on stage"
+              fill
+              priority
+              sizes="(min-width: 1024px) 480px, 100vw"
+              className="object-cover"
+            />
+          </div>
         </Container>
       </section>
 
@@ -104,6 +117,55 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
+        </Container>
+      </section>
+
+      {/* Founder */}
+      <section className="bg-white">
+        <Container className="py-16 sm:py-24">
+          <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
+            The <em className="italic">founder.</em>
+          </h2>
+          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-[220px_1fr] sm:gap-12">
+            <div className="relative aspect-square overflow-hidden rounded-2xl sm:h-full sm:aspect-auto">
+              <Image
+                src="/team/tobi-headshot.jpg"
+                alt="Tobi Ojet, founder of Lumon Studios"
+                fill
+                sizes="220px"
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="text-2xl font-medium">Tobi Ojet</p>
+              <p className="mt-1 font-mono text-xs tracking-wide text-gray-500 uppercase">
+                Founder, Lumon Studios
+              </p>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-700 sm:text-lg">
+                Electrical &amp; Electronics Engineer by background,
+                course-systems builder by trade. Tobi has shipped 100+
+                course platforms and websites for coaches, consultants, and
+                training organisations across the US, UK, Canada, and
+                Australia — and still does the build work himself, on every
+                project.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Team */}
+      <section className="bg-[#fbfbfb]">
+        <Container className="py-16 sm:py-24">
+          <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
+            The <em className="italic">team.</em>
+          </h2>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-gray-700 sm:text-lg">
+            Right now, that&rsquo;s just Tobi. Every build, every client
+            call, every line of code on this site — one person, on purpose.
+            It&rsquo;s what keeps the standard high and the handoffs at
+            zero. When that changes, this section will say so.
+          </p>
         </Container>
       </section>
 

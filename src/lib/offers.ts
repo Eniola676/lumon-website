@@ -64,8 +64,8 @@ export const OFFERS: Record<string, OfferContent> = {
     heroHeadline:
       "You've been “thinking about doing a course” for a year. Let's make it real in 14 days.",
     heroSub:
-      "You bring the expertise. I build everything else: the course site, the platform, the payments, the emails. One flat fee, launched in two weeks.",
-    heroAnchors: "From $1,500 · Delivered in 14 days",
+      "A professional website and course launch system for experts launching their first paid program. You bring the expertise — I build the site, the platform, the payments, the emails. One flat fee, launched in two weeks.",
+    heroAnchors: "From $2,500 · Delivered in 14 days",
     heroCtaLabel: "Book a Discovery Call",
 
     whoHeading:
@@ -124,7 +124,7 @@ export const OFFERS: Record<string, OfferContent> = {
       },
     ],
 
-    price: "From $1,500",
+    price: "From $2,500",
     priceTerms: "Flat fee. Delivered in 14 days.",
     addOns: [
       {
@@ -208,8 +208,8 @@ export const OFFERS: Record<string, OfferContent> = {
     heroHeadline:
       "Your coaching business outgrew its tech stack. I rebuild it so growth stops breaking things.",
     heroSub:
-      "For coaches doing $10k+/month on tools that were set up in year one and duct-taped ever since. One rebuild, six weeks, zero downtime.",
-    heroAnchors: "From $6,500 · Delivered in 6 weeks",
+      "A premium website rebuild plus full course system integration, for established coaches doing $10k+/month on tools that were set up in year one and duct-taped ever since. One rebuild, six weeks, zero downtime.",
+    heroAnchors: "From $7,500 · Delivered in 6 weeks",
     heroCtaLabel: "Book a Systems Audit Call",
 
     whoHeading: "You already know what's broken. You've written the list a dozen times.",
@@ -272,7 +272,7 @@ export const OFFERS: Record<string, OfferContent> = {
       },
     ],
 
-    price: "From $6,500",
+    price: "From $7,500",
     priceTerms: "Flat fee. Delivered in 6 weeks.",
     addOns: [
       {
@@ -342,7 +342,7 @@ export const OFFERS: Record<string, OfferContent> = {
     heroSub:
       "For agencies, consultancies, SaaS teams, and CE providers who've sold (or need) a training platform and don't have the team to build it. Whitelabel by default, NDA before anything starts, and you get the full source when it's done.",
     heroAnchors:
-      "Projects from $8,000 · Retainers from $2,000/month · Every engagement scoped independently",
+      "Projects from $10,000 · Retainers from $2,000/month · Every engagement scoped independently",
     heroCtaLabel: "Request a Partnership Conversation",
 
     whoHeading: "You don't need another vendor pitch. You need someone who ships.",

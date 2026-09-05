@@ -12,8 +12,7 @@ import {
 import { gsap } from "gsap";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const CONTACT_EMAIL = "tobi@lumonstudiomail.com";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 const PAIN_OPTIONS = [
   "My website isn't built to convert.",
@@ -87,6 +86,8 @@ function OptionButton({
 export function ContactForm() {
   const [stepIndex, setStepIndex] = useState(0);
   const [done, setDone] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const [pain, setPain] = useState("");
   const [customPain, setCustomPain] = useState(false);
   const [program, setProgram] = useState("");
@@ -205,45 +206,34 @@ export function ContactForm() {
     goNext();
   }
 
-  function submitAll() {
-    const subject = "Lumon Studios inquiry";
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Pain point: ${pain || "Not specified"}`,
-      `Program: ${program || "Not specified"}`,
-      "",
-      "Project details:",
-      message || "(not provided)",
-    ].join("\n");
+  async function submitAll() {
+    if (submitting) return;
+    setSubmitting(true);
+    setSubmitError(false);
 
-    // Fire-and-forget: adds the lead to Zoho Campaigns' contact list.
-    // keepalive lets this finish even if mailto: below causes the tab to
-    // lose focus. The actual message content still goes to CONTACT_EMAIL
-    // via mailto — this is just for keeping a lead list.
-    fetch("/api/contact-lead", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email }),
-      keepalive: true,
-    }).catch(() => {
-      // Non-critical — the mailto below still carries the actual inquiry.
-    });
-
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-
-    if (contentRef.current) {
-      gsap.to(contentRef.current, {
-        opacity: 0,
-        y: -12,
-        duration: 0.2,
-        ease: "power2.in",
-        onComplete: () => setDone(true),
+    try {
+      const response = await fetch("/api/contact-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, pain, program, message }),
       });
-    } else {
-      setDone(true);
+      if (!response.ok) throw new Error("request failed");
+
+      if (contentRef.current) {
+        gsap.to(contentRef.current, {
+          opacity: 0,
+          y: -12,
+          duration: 0.2,
+          ease: "power2.in",
+          onComplete: () => setDone(true),
+        });
+      } else {
+        setDone(true);
+      }
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -269,10 +259,10 @@ export function ContactForm() {
           <Check className="size-5" />
         </div>
         <h3 className="mt-5 text-2xl font-normal tracking-tight sm:text-3xl">
-          Your email client should be open now.
+          Sent. I&rsquo;ll reply within one business day.
         </h3>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-gray-600 sm:text-base">
-          If nothing happened, reach out directly at{" "}
+          You can also reach out directly at{" "}
           <a
             href={`mailto:${CONTACT_EMAIL}`}
             className="underline hover:text-black"
@@ -529,9 +519,18 @@ export function ContactForm() {
             <KeyHint>
               Shift + Enter for a new line · ⌘/Ctrl + Enter to send
             </KeyHint>
-            <Button type="submit" variant="primary" className="mt-6">
-              Send Message
+            <Button type="submit" variant="primary" className="mt-6" disabled={submitting}>
+              {submitting ? "Sending…" : "Send Message"}
             </Button>
+            {submitError && (
+              <p className="mt-3 text-sm text-red-600">
+                Something went wrong sending that — try again, or email{" "}
+                <a href={`mailto:${CONTACT_EMAIL}`} className="underline hover:text-black">
+                  {CONTACT_EMAIL}
+                </a>{" "}
+                directly.
+              </p>
+            )}
           </form>
         )}
       </div>

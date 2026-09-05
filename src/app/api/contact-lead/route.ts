@@ -1,12 +1,14 @@
 import { NextResponse } from "next/server";
-import { addContactToZohoList } from "@/lib/zoho-campaigns";
-
-const CONTACT_LIST_KEY = process.env.ZOHO_CAMPAIGNS_CONTACT_LIST_KEY;
+import { sendNotificationEmail } from "@/lib/notify";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function isNonEmptyString(value: unknown): value is string {
   return typeof value === "string" && value.trim().length > 0;
+}
+
+function asString(value: unknown, fallback = "Not specified"): string {
+  return isNonEmptyString(value) ? value.trim() : fallback;
 }
 
 export async function POST(request: Request) {
@@ -17,26 +19,32 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
 
-  const { name, email } = body;
+  const { name, email, pain, program, message } = body;
 
   if (!isNonEmptyString(name) || !isNonEmptyString(email) || !EMAIL_RE.test(email)) {
     return NextResponse.json({ error: "A valid name and email are required." }, { status: 400 });
   }
 
-  if (!CONTACT_LIST_KEY) {
-    console.error("[contact-lead] ZOHO_CAMPAIGNS_CONTACT_LIST_KEY is not configured.");
-    return NextResponse.json({ error: "Lead capture is not configured." }, { status: 500 });
-  }
+  const trimmedName = name.trim();
+  const trimmedEmail = email.trim();
 
   try {
-    await addContactToZohoList({
-      listKey: CONTACT_LIST_KEY,
-      email: email.trim(),
-      firstName: name.trim(),
+    await sendNotificationEmail({
+      replyTo: trimmedEmail,
+      subject: `Lumon Studios inquiry — ${trimmedName}`,
+      text: [
+        `Name: ${trimmedName}`,
+        `Email: ${trimmedEmail}`,
+        `Pain point: ${asString(pain)}`,
+        `Program: ${asString(program)}`,
+        "",
+        "Project details:",
+        asString(message, "(not provided)"),
+      ].join("\n"),
     });
   } catch (error) {
-    console.error("[contact-lead] delivery failed:", error);
-    return NextResponse.json({ error: "Could not save that right now." }, { status: 502 });
+    console.error("[contact-lead] email delivery failed:", error);
+    return NextResponse.json({ error: "Could not send that right now." }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });

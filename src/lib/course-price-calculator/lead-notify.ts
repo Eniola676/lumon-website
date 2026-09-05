@@ -1,14 +1,7 @@
-// Delivery for course-calculator leads — adds the contact to the "Course
-// Calculator Leads" list in Zoho Campaigns, with the quiz answers as custom
-// fields. A Zoho Autoresponder configured on that list (Campaigns UI, not
-// code) sends the actual roadmap-email sequence when a contact lands on it.
-//
-// Field names below must exactly match custom fields created on that list
-// in Zoho Campaigns (Contacts → Manage Fields) — unrecognized keys are
-// silently dropped by Zoho's API rather than rejected.
-import { addContactToZohoList } from "@/lib/zoho-campaigns";
-
-const CALCULATOR_LIST_KEY = process.env.ZOHO_CAMPAIGNS_CALCULATOR_LIST_KEY;
+// Delivery for course-calculator leads — sends an email with the visitor's
+// answers and computed price range so it's visible immediately, no
+// dashboard required.
+import { sendNotificationEmail } from "@/lib/notify";
 
 export type CourseCalculatorLead = {
   firstName: string;
@@ -24,25 +17,21 @@ export type CourseCalculatorLead = {
 };
 
 export async function sendCourseCalculatorLead(lead: CourseCalculatorLead): Promise<void> {
-  if (!CALCULATOR_LIST_KEY) {
-    throw new Error("ZOHO_CAMPAIGNS_CALCULATOR_LIST_KEY is not configured.");
-  }
-
-  const response = await addContactToZohoList({
-    listKey: CALCULATOR_LIST_KEY,
-    email: lead.email,
-    firstName: lead.firstName,
-    fields: {
-      "Course Format": lead.format,
-      "Course Category": lead.category,
-      "Access Level": lead.access,
-      "Outcome Type": lead.outcomeType,
-      "Proof Score": lead.proofScore,
-      "Price Low": lead.low,
-      "Price High": lead.high,
-      "Suggested Price": lead.anchor,
-    },
+  await sendNotificationEmail({
+    replyTo: lead.email,
+    subject: `Course calculator lead — ${lead.firstName}`,
+    text: [
+      `Name: ${lead.firstName}`,
+      `Email: ${lead.email}`,
+      "",
+      `Format: ${lead.format}`,
+      `Category: ${lead.category}`,
+      `Access level: ${lead.access}`,
+      `Outcome type: ${lead.outcomeType}`,
+      `Proof score: ${lead.proofScore}`,
+      "",
+      `Price range: $${lead.low} – $${lead.high}`,
+      `Suggested price: $${lead.anchor}`,
+    ].join("\n"),
   });
-
-  console.log("[course-calculator-lead] added to Zoho Campaigns:", response);
 }

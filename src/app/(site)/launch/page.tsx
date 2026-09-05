@@ -7,7 +7,7 @@ import { LAUNCH_FEATURES } from "@/lib/feature-sections";
 export const metadata: Metadata = {
   title: "Lumon Launch — Lumon Studios",
   description:
-    "Launch your first online course in 14 days. Course site, payment infrastructure, and email automation — built for coaches and consultants selling their first course. From $1,500.",
+    "A professional website + course launch system for experts launching their first paid program. Course site, payment infrastructure, and email automation — live in 14 days. From $2,500.",
   alternates: { canonical: "/launch" },
 };
 

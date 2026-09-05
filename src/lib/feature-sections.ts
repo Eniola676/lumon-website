@@ -5,7 +5,7 @@ import {
   Video,
   LayoutDashboard,
   Sparkles,
-  Megaphone,
+  BadgeCheck,
   RefreshCw,
   Workflow,
   Zap,
@@ -88,9 +88,9 @@ export const LAUNCH_FEATURES: FeatureSectionContent = {
       body: "I turn your slides, notes, or scripts into presenter-led video lessons using AI avatars. No camera, no studio, no re-recording lesson 4 for the fifth time. If the reason you haven't launched is “I hate filming myself,” this removes it.",
     },
     {
-      icon: Megaphone,
-      title: "An audience engine that runs on 30 minutes a day.",
-      body: "No audience yet? That's the real bottleneck, not the tech. You record 30 minutes daily from scripts I write. I turn that into 6 ready-to-post short videos for your Instagram every day. After 60 days, people know you before you ever pitch them.",
+      icon: BadgeCheck,
+      title: "A site that makes “hire this person” the obvious call.",
+      body: "Custom design, not a template with your logo swapped in. For most first-time buyers, the site is the first real signal you're not another side-hustle course — it's what makes paying you feel safe.",
     },
     {
       icon: Mail,
