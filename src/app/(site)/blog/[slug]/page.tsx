@@ -144,6 +144,20 @@ export default async function BlogPostPage({
                   Book a Call
                 </CalendlyButton>
               </div>
+              <p className="mt-4 text-center text-xs text-white/40">
+                Prefer email?{" "}
+                <Link href="/contact" className="underline underline-offset-2 hover:text-white">
+                  Get in touch
+                </Link>
+                . Or see what your course should{" "}
+                <Link
+                  href="/tools/online-course-price-calculator"
+                  className="underline underline-offset-2 hover:text-white"
+                >
+                  cost
+                </Link>
+                .
+              </p>
             </div>
           </aside>
 

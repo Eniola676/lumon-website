@@ -2,7 +2,7 @@ import {
   Globe,
   GraduationCap,
   Mail,
-  Video,
+  ShieldCheck,
   LayoutDashboard,
   Sparkles,
   BadgeCheck,
@@ -50,9 +50,9 @@ export const HOME_FEATURES: FeatureSectionContent = {
       body: "Welcome sequences, post-purchase upsells, cart abandonment recovery. Every email your business needs, written and automated.",
     },
     {
-      icon: Video,
-      title: "Six videos a day. Thirty minutes of your time.",
-      body: "Record for thirty minutes using scripts we provide. We turn it into six ready-to-post videos per day for your Instagram. Consistent presence, without becoming a full-time content creator.",
+      icon: ShieldCheck,
+      title: "Every button tested before you ever see it.",
+      body: "Payments verified. Automations fired end-to-end. Links checked. If a piece only works in theory, it doesn't ship — you get a system that works the day it goes live, not a demo you have to debug yourself.",
     },
     {
       icon: LayoutDashboard,

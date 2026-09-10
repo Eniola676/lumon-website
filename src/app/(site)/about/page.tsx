@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { NumberedList } from "@/components/ui/numbered-list";
 import { ClosingCta } from "@/components/ui/closing-cta";
@@ -199,6 +200,13 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+          <p className="mt-10 text-sm text-white/40">
+            See the work itself in the{" "}
+            <Link href="/case-studies" className="underline underline-offset-4 hover:text-white">
+              case studies
+            </Link>
+            .
+          </p>
         </Container>
       </section>
 
@@ -206,6 +214,18 @@ export default function AboutPage() {
         If any of this sounds like your kind of work —{" "}
         <em className="italic">let&rsquo;s talk.</em>
       </ClosingCta>
+
+      <section className="bg-[#fbfbfb] pb-16 text-center">
+        <Container>
+          <p className="text-sm text-gray-500">
+            Prefer to write first?{" "}
+            <Link href="/contact" className="underline underline-offset-4 hover:text-black">
+              Send us a message
+            </Link>{" "}
+            instead.
+          </p>
+        </Container>
+      </section>
     </>
   );
 }

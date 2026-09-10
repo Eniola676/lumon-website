@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { CalendlyButton } from "@/components/ui/calendly-button";
 import { NumberedList } from "@/components/ui/numbered-list";
@@ -164,6 +165,16 @@ export function OfferPage({
                 </div>
               </div>
             )}
+            <p className="mt-8 text-sm text-gray-500">
+              Not sure this is the right price point?{" "}
+              <Link
+                href="/tools/online-course-price-calculator"
+                className="underline underline-offset-4 hover:text-black"
+              >
+                Try the free course pricing calculator
+              </Link>
+              .
+            </p>
           </Container>
         </section>
       )}
@@ -200,7 +211,16 @@ export function OfferPage({
             <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
               Common <em className="italic">questions.</em>
             </h2>
-            <Faq items={offer.faqItems} />
+            <div>
+              <Faq items={offer.faqItems} />
+              <p className="mt-8 text-sm text-gray-500">
+                Something else on your mind?{" "}
+                <Link href="/contact" className="underline underline-offset-4 hover:text-black">
+                  Ask us directly
+                </Link>
+                .
+              </p>
+            </div>
           </div>
         </Container>
       </section>

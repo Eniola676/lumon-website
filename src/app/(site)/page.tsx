@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { CalendlyButton } from "@/components/ui/calendly-button";
 import { NumberedList } from "@/components/ui/numbered-list";
@@ -125,6 +126,13 @@ export default async function Home() {
               ]}
             />
           </div>
+          <p className="mt-8 text-sm text-gray-500">
+            Not sure what your own course should cost?{" "}
+            <Link href="/tools/online-course-price-calculator" className="underline underline-offset-4 hover:text-black">
+              Try the free pricing calculator
+            </Link>
+            .
+          </p>
         </Container>
       </section>
 
@@ -203,6 +211,18 @@ export default async function Home() {
       <ClosingCta dark buttonLabel="Book a Discovery Call">
         Ready to build something that <em className="italic">actually works?</em>
       </ClosingCta>
+
+      <section className="bg-[#070707] pb-16 text-center">
+        <Container>
+          <p className="text-sm text-white/40">
+            Prefer to write first?{" "}
+            <Link href="/contact" className="underline underline-offset-4 hover:text-white">
+              Send us a message
+            </Link>{" "}
+            instead.
+          </p>
+        </Container>
+      </section>
     </>
   );
 }
