@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { X } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { CalendlyButton } from "@/components/ui/calendly-button";
 import { NumberedList } from "@/components/ui/numbered-list";
 import { Checklist } from "@/components/ui/checklist";
-import { WorkCard } from "@/components/ui/work-card";
+import { WorkCardMarquee } from "@/components/ui/work-card-marquee";
 import { ClosingCta } from "@/components/ui/closing-cta";
 import { MarqueeLogoScroller } from "@/components/ui/marquee-logo-scroller";
 import { AiSummaryLinks } from "@/components/ui/ai-summary-links";
@@ -16,6 +17,15 @@ import { PLATFORM_LOGOS } from "@/lib/platform-logos";
 import { CLIENTS } from "@/lib/clients";
 import { getFeaturedCaseStudies, caseStudyToWorkItem } from "@/lib/case-studies";
 import { HOME_FEATURES } from "@/lib/feature-sections";
+
+const FAILURE_LIST = [
+  "Six months comparing Kajabi, Thinkific, Teachable, and Podia",
+  "Videos recorded, sitting in a Drive folder, no structure around them",
+  "Launching without a proven, scalable system for acquiring students",
+  "Email automations built in three tools that don't talk to each other",
+  "Platform-hopped twice after getting stuck, started over both times",
+  "An audience that asked twice and stopped asking",
+];
 
 export const revalidate = 3600;
 
@@ -33,7 +43,7 @@ export default async function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#3d7cc9] text-white">
+      <section className="relative flex min-h-[90vh] flex-col overflow-hidden bg-[#3d7cc9] text-white sm:min-h-[95vh]">
         {/*
           TODO: swap this placeholder for the real sky/clouds background image.
           Drop the file in /public (e.g. /public/hero-sky.jpg) and replace
@@ -48,20 +58,20 @@ export default async function Home() {
         <div className="absolute right-[20%] bottom-[5%] h-32 w-64 rounded-full bg-white/40 blur-2xl" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
 
-        <Container className="relative pt-36 pb-32 text-center sm:pt-44 sm:pb-40 lg:pt-52 lg:pb-48">
+        <Container className="relative flex flex-1 flex-col items-center justify-center pt-20 pb-4 text-center sm:pt-28 sm:pb-6">
           <div className="flex justify-center">
-            <div className="inline-flex flex-wrap justify-center rounded-full border border-white/25 bg-white/10 px-5 py-2.5 backdrop-blur-sm">
+            <div className="inline-flex flex-wrap justify-center rounded-full border border-white/25 bg-white/10 px-4 py-2 backdrop-blur-sm sm:px-5 sm:py-2.5">
               <AiSummaryLinks />
             </div>
           </div>
 
-          <h1 className="mx-auto mt-8 max-w-3xl text-4xl leading-[1.1] font-black tracking-tight uppercase sm:max-w-3xl sm:text-5xl lg:max-w-5xl lg:text-6xl">
-            we build the machine that makes your coaching business run.
+          <h1 className="mx-auto mt-4 max-w-3xl text-4xl leading-[1.1] font-black tracking-tight uppercase sm:mt-6 sm:max-w-3xl sm:text-5xl lg:max-w-5xl lg:text-6xl">
+            Monetize Your Expertise with a Premium Website & Course
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+          <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-white/85 sm:mt-5 sm:text-lg">
             The infrastructure behind coaching businesses that actually make money.
           </p>
-          <div className="mt-10 flex flex-col items-center gap-3">
+          <div className="mt-5 flex flex-col items-center gap-2 sm:mt-8 sm:gap-3">
             <CalendlyButton variant="primary-invert">
               Book a Discovery Call
             </CalendlyButton>
@@ -76,16 +86,54 @@ export default async function Home() {
             </a>
           </div>
         </Container>
+
+        {/* Work we've built — full-width marquee, pinned to the bottom of the hero */}
+        <div className="relative shrink-0 pb-4 sm:pb-8">
+          <p className="mb-2 text-center font-mono text-xs tracking-wide text-white/60 uppercase sm:mb-3">
+            Work we&rsquo;ve built
+          </p>
+          <WorkCardMarquee items={workItems} />
+        </div>
       </section>
 
-      {/* Trust bar */}
+      {/* The problem */}
       <section className="bg-white">
-        <Container className="py-12">
-          <MarqueeLogoScroller
-            title="Platforms we build on."
-            logos={PLATFORM_LOGOS}
-            speed="slow"
-          />
+        <Container className="py-16 sm:py-24">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-20">
+            <div>
+              <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
+                The actual first step is never{" "}
+                <em className="italic">building the course itself.</em>
+              </h2>
+              <p className="mt-6 text-base leading-relaxed text-gray-600 sm:text-lg">
+                Most courses stall out long before the final edit. The real
+                failure happens earlier, when creators focus on producing
+                content prior to validating their target buyer, core
+                promise, price point, and launch strategy. Typically, the
+                cycle unfolds like this:
+              </p>
+              <div className="mt-8 border-l-2 border-black pl-6">
+                <p className="font-mono text-xs tracking-wide text-gray-500 uppercase">
+                  My view
+                </p>
+                <p className="mt-3 text-base leading-relaxed text-gray-800 sm:text-lg">
+                  Most coaches don&rsquo;t need six months of strategy before
+                  they build. Expertise is real. The risk is spending months
+                  producing a product before a single buyer has proven they
+                  want it. Start with proof. Build what sells. Operate what
+                  works.
+                </p>
+              </div>
+            </div>
+            <ul className="space-y-4">
+              {FAILURE_LIST.map((item) => (
+                <li key={item} className="flex gap-4 text-base leading-relaxed sm:text-lg">
+                  <X className="mt-1 size-4 shrink-0 text-gray-400" />
+                  <span className="text-gray-700">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Container>
       </section>
 
@@ -138,44 +186,14 @@ export default async function Home() {
 
       <FeatureSection {...HOME_FEATURES} />
 
-      {/* The problem */}
-      <section className="bg-[#fbfbfb]">
-        <Container className="py-16 sm:py-24">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
-              Coaches lose more revenue to broken tech{" "}
-              <em className="italic">than to bad marketing.</em>
-            </h2>
-            <p className="mt-6 text-base leading-relaxed text-gray-600 sm:text-lg">
-              Half-built course sites. Payments that don&rsquo;t route.
-              Automations that half-fire. Fifteen tools duct-taped together
-              that only your VA half-understands. Every one of these leaks
-              revenue, and none of them are why you started coaching.
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-gray-600 sm:text-lg">
-              Lumon Studios exists to fix the system so the business runs on
-              rails — and you go back to being the expert, not the tech
-              support.
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      {/* Proof */}
+      {/* Trust bar */}
       <section className="bg-white">
-        <Container className="py-16 sm:py-24">
-          <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
-            Work we&rsquo;ve <em className="italic">built.</em>
-          </h2>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 sm:text-lg">
-            Sixty-plus projects. Coaches, consultants, and organisations
-            across the US, UK, and beyond.
-          </p>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {workItems.map((item) => (
-              <WorkCard key={item.href} {...item} />
-            ))}
-          </div>
+        <Container className="py-12">
+          <MarqueeLogoScroller
+            title="Platforms we build on."
+            logos={PLATFORM_LOGOS}
+            speed="slow"
+          />
         </Container>
       </section>
 
