@@ -250,18 +250,42 @@ export default async function CaseStudyPage({
               The <em className="italic">work.</em>
             </h2>
             <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {caseStudy.gallery.map((image, i) => (
-                <div key={i} className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#fbfbfb]">
-                  <Image
-                    src={urlFor(image).width(1000).height(750).fit("crop").auto("format").url()}
-                    alt={image.alt ?? `${caseStudy.companyName} project image ${i + 1}`}
-                    fill
-                    loading="lazy"
-                    sizes="(min-width: 640px) 50vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+              {caseStudy.gallery.map((item, i) =>
+                item._type === "galleryVideo" ? (
+                  <div
+                    key={i}
+                    className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#fbfbfb]"
+                  >
+                    <video
+                      src={item.file.url}
+                      poster={
+                        item.poster
+                          ? urlFor(item.poster).width(1000).height(750).fit("crop").auto("format").url()
+                          : undefined
+                      }
+                      controls
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      aria-label={item.caption ?? `${caseStudy.companyName} project video ${i + 1}`}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div key={i} className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#fbfbfb]">
+                    <Image
+                      src={urlFor(item).width(1000).height(750).fit("crop").auto("format").url()}
+                      alt={item.alt ?? `${caseStudy.companyName} project image ${i + 1}`}
+                      fill
+                      loading="lazy"
+                      sizes="(min-width: 640px) 50vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                )
+              )}
             </div>
           </Container>
         </section>

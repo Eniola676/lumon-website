@@ -20,6 +20,17 @@ export type CaseStudyTool = {
   logo?: CaseStudyImage;
 };
 
+export type CaseStudyGalleryImage = CaseStudyImage & { _type: "image" };
+
+export type CaseStudyGalleryVideo = {
+  _type: "galleryVideo";
+  file: { url: string; mimeType?: string };
+  poster?: CaseStudyImage;
+  caption?: string;
+};
+
+export type CaseStudyGalleryItem = CaseStudyGalleryImage | CaseStudyGalleryVideo;
+
 export type CaseStudyTestimonial = {
   quote: string;
   name: string;
@@ -46,7 +57,7 @@ export type CaseStudyCard = {
 export type CaseStudyFull = CaseStudyCard & {
   projectLink?: string;
   toolsUsed?: CaseStudyTool[];
-  gallery?: CaseStudyImage[];
+  gallery?: CaseStudyGalleryItem[];
   testimonials?: CaseStudyTestimonial[];
   theClient: PortableTextBlock[];
   theChallenge: PortableTextBlock[];
@@ -130,7 +141,10 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudyFull | 
         ${CARD_FIELDS},
         projectLink,
         toolsUsed,
-        gallery,
+        gallery[]{
+          ...,
+          _type == "galleryVideo" => { "file": file.asset->{url, mimeType} }
+        },
         testimonials,
         theClient,
         theChallenge,

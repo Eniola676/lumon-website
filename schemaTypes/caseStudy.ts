@@ -239,11 +239,13 @@ export const caseStudy = defineType({
     defineField({
       name: "gallery",
       title: "Gallery",
+      description: "Photos (animated GIFs work fine here too) or short video clips.",
       type: "array",
       group: "media",
       of: [
         defineArrayMember({
           type: "image",
+          title: "Image",
           options: { hotspot: true },
           fields: [
             {
@@ -253,6 +255,38 @@ export const caseStudy = defineType({
               validation: (Rule) => Rule.required(),
             },
           ],
+        }),
+        defineArrayMember({
+          type: "object",
+          name: "galleryVideo",
+          title: "Video",
+          fields: [
+            defineField({
+              name: "file",
+              title: "Video file",
+              type: "file",
+              options: { accept: "video/*" },
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "poster",
+              title: "Poster image",
+              description: "Optional thumbnail shown before the video plays.",
+              type: "image",
+              options: { hotspot: true },
+            }),
+            defineField({
+              name: "caption",
+              title: "Caption / alt text",
+              type: "string",
+            }),
+          ],
+          preview: {
+            select: { title: "caption", media: "poster" },
+            prepare({ title, media }) {
+              return { title: title || "Video", media };
+            },
+          },
         }),
       ],
     }),
