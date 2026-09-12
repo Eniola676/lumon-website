@@ -61,7 +61,7 @@ export default function ContactPage() {
                 </p>
                 <div className="mt-8">
                   <CalendlyButton variant="primary-invert">
-                    Book a Discovery Call
+                    Yes! Let&rsquo;s talk
                   </CalendlyButton>
                 </div>
               </div>

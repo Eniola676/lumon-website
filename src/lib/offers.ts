@@ -66,7 +66,7 @@ export const OFFERS: Record<string, OfferContent> = {
     heroSub:
       "A professional website and course launch system for experts launching their first paid program. You bring the expertise — I build the site, the platform, the payments, the emails. One flat fee, launched in two weeks.",
     heroAnchors: "From $2,500 · Delivered in 14 days",
-    heroCtaLabel: "Book a Discovery Call",
+    heroCtaLabel: "Yes! Let's launch my course",
 
     whoHeading:
       "You're not stuck because you lack information. You're stuck because nobody's building the thing.",
@@ -199,7 +199,7 @@ export const OFFERS: Record<string, OfferContent> = {
 
     closingLead: "Still “thinking about doing a course”?",
     closingEmphasis: "You've thought enough.",
-    closingCtaLabel: "Book a Discovery Call",
+    closingCtaLabel: "Yes! Let's launch my course",
   },
 
   scale: {
@@ -210,7 +210,7 @@ export const OFFERS: Record<string, OfferContent> = {
     heroSub:
       "A premium website rebuild plus full course system integration, for established coaches doing $10k+/month on tools that were set up in year one and duct-taped ever since. One rebuild, six weeks, zero downtime.",
     heroAnchors: "From $7,500 · Delivered in 6 weeks",
-    heroCtaLabel: "Book a Systems Audit Call",
+    heroCtaLabel: "Yes! Let's rebuild my systems",
 
     whoHeading: "You already know what's broken. You've written the list a dozen times.",
     whoIntro:
@@ -331,7 +331,7 @@ export const OFFERS: Record<string, OfferContent> = {
 
     closingLead: "Stop patching.",
     closingEmphasis: "Rebuild once, properly.",
-    closingCtaLabel: "Book a Systems Audit Call",
+    closingCtaLabel: "Yes! Let's rebuild my systems",
   },
 
   enterprise: {
@@ -343,7 +343,7 @@ export const OFFERS: Record<string, OfferContent> = {
       "For agencies, consultancies, SaaS teams, and CE providers who've sold (or need) a training platform and don't have the team to build it. Whitelabel by default, NDA before anything starts, and you get the full source when it's done.",
     heroAnchors:
       "Projects from $10,000 · Retainers from $2,000/month · Every engagement scoped independently",
-    heroCtaLabel: "Request a Partnership Conversation",
+    heroCtaLabel: "Yes! Let's talk partnership",
 
     whoHeading: "You don't need another vendor pitch. You need someone who ships.",
     whoIntro:
@@ -465,6 +465,6 @@ export const OFFERS: Record<string, OfferContent> = {
 
     closingLead: "If you've been looking for a delivery partner who actually delivers,",
     closingEmphasis: "let's talk.",
-    closingCtaLabel: "Request a Partnership Conversation",
+    closingCtaLabel: "Yes! Let's talk partnership",
   },
 };

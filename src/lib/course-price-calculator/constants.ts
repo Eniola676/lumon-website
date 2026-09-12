@@ -237,6 +237,6 @@ export const LAUNCH_CTA_COPY = {
   eyebrow: "Lumon Launch",
   headline: "Priced it. Now launch it in 14 days.",
   body: "You know what your course is worth. Lumon Launch is the done-for-you build that gets it live in two weeks — a professional website, course platform, payments, email automation and AI-avatar lesson videos included. Flat fee from $2,500. Bring the expertise; we bring the launch.",
-  buttonLabel: "See if your course qualifies →",
+  buttonLabel: "Yes! Let's see if I qualify →",
   buttonSubtext: "20-minute call. We'll tell you honestly if it's a fit.",
 };

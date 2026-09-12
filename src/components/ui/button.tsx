@@ -1,8 +1,8 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 // whitespace-normal below sm: on narrow phones, a long CTA label (e.g.
-// "Request a Partnership Conversation") forced onto one nowrap line can
-// push the button past the viewport edge and cause page-wide horizontal
+// "Yes! Let's rebuild my systems") forced onto one nowrap line can push
+// the button past the viewport edge and cause page-wide horizontal
 // scroll. Wrapping to two lines there is safer than that. Desktop/tablet
 // keep the single-line look.
 const base =

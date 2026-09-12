@@ -40,24 +40,6 @@ const PRINCIPLES = [
   },
 ];
 
-const RECORD = [
-  {
-    stat: "100+ course platforms and websites built.",
-    detail:
-      "Kajabi, Thinkific, Teachable, GoHighLevel, Webflow, WordPress, and custom builds.",
-  },
-  {
-    stat: "Clients across the US, UK, Canada, and Australia.",
-    detail:
-      "Coaches, consultants, therapists, agencies, and training organisations.",
-  },
-  {
-    stat: "Background in Electrical & Electronics Engineering.",
-    detail:
-      "The systems mindset is baked in — every project is engineered, not just decorated.",
-  },
-];
-
 export default function AboutPage() {
   return (
     <>
@@ -73,6 +55,13 @@ export default function AboutPage() {
               systems, funnels, and websites for coaches, consultants, and
               training organisations.
             </p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs tracking-wide text-gray-500 uppercase">
+              <span>100+ builds shipped</span>
+              <span className="text-gray-300">·</span>
+              <span>US, UK, Canada &amp; Australia</span>
+              <span className="text-gray-300">·</span>
+              <span>EE background</span>
+            </div>
           </div>
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
             <Image
@@ -87,86 +76,59 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* The story */}
+      {/* The founder's letter */}
       <section className="bg-[#fbfbfb]">
         <Container className="py-16 sm:py-24">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
-              How Lumon Studios <em className="italic">started.</em>
-            </h2>
-            <div className="mt-8 space-y-6 text-base leading-relaxed text-gray-700 sm:text-lg">
-              <p>
-                I&rsquo;m Tobi. I&rsquo;ve spent the last few years building
-                course platforms, funnels, and websites for coaches,
-                consultants, and course creators — mostly on Kajabi,
-                Thinkific, Teachable, GoHighLevel, and WordPress. Somewhere
-                between the sixtieth build and the hundredth, a pattern
-                became impossible to ignore.
-              </p>
-              <p>
-                Most of my clients didn&rsquo;t have a course problem. They
-                had a system problem. The course was fine. What was missing
-                was the machinery around it — the funnel, the automation, the
-                follow-up, the website that matched their level. Without
-                those, even the best course sat idle.
-              </p>
-              <p>
-                Lumon Studios is what I built to solve that. Not a Fiverr
-                freelancer service. Not a $15,000-a-month agency. A focused
-                studio where I do the work myself, with the standards I&rsquo;d
-                want if I were on the other side of the invoice.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Founder */}
-      <section className="bg-white">
-        <Container className="py-16 sm:py-24">
-          <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
-            The <em className="italic">founder.</em>
-          </h2>
-          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-[220px_1fr] sm:gap-12">
-            <div className="relative aspect-square overflow-hidden rounded-2xl sm:h-full sm:aspect-auto">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[360px_1fr] lg:gap-16">
+            <div className="relative aspect-square overflow-hidden rounded-3xl lg:aspect-auto lg:h-full">
               <Image
                 src="/team/tobi-headshot.jpg"
                 alt="Tobi Ojet, founder of Lumon Studios"
                 fill
-                sizes="220px"
+                sizes="(min-width: 1024px) 360px, 100vw"
                 className="object-cover"
               />
             </div>
             <div>
-              <p className="text-2xl font-medium">Tobi Ojet</p>
-              <p className="mt-1 font-mono text-xs tracking-wide text-gray-500 uppercase">
-                Founder, Lumon Studios
-              </p>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-700 sm:text-lg">
-                Electrical &amp; Electronics Engineer by background,
-                course-systems builder by trade. Tobi has shipped 100+
-                course platforms and websites for coaches, consultants, and
-                training organisations across the US, UK, Canada, and
-                Australia — and still does the build work himself, on every
-                project.
-              </p>
+              <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
+                How Lumon Studios <em className="italic">started.</em>
+              </h2>
+              <div className="mt-8 space-y-6 text-base leading-relaxed text-gray-700 sm:text-lg">
+                <p>
+                  I&rsquo;m Tobi. I&rsquo;ve spent the last few years building
+                  course platforms, funnels, and websites for coaches,
+                  consultants, and course creators — mostly on Kajabi,
+                  Thinkific, Teachable, GoHighLevel, and WordPress. Somewhere
+                  between the sixtieth build and the hundredth, a pattern
+                  became impossible to ignore.
+                </p>
+                <p>
+                  Most of my clients didn&rsquo;t have a course problem. They
+                  had a system problem. The course was fine. What was
+                  missing was the machinery around it — the funnel, the
+                  automation, the follow-up, the website that matched their
+                  level. Without those, even the best course sat idle.
+                </p>
+                <p>
+                  Lumon Studios is what I built to solve that. Not a Fiverr
+                  freelancer service. Not a $15,000-a-month agency. A
+                  focused studio where I do the work myself, with the
+                  standards I&rsquo;d want if I were on the other side of
+                  the invoice.
+                </p>
+              </div>
+              <div className="mt-8 border-t border-[#e9e9ea] pt-6">
+                <p className="text-lg font-medium">Tobi Ojet</p>
+                <p className="mt-1 font-mono text-xs tracking-wide text-gray-500 uppercase">
+                  Founder, Lumon Studios
+                </p>
+                <p className="mt-3 max-w-md text-sm leading-relaxed text-gray-500">
+                  Currently a team of one, by design — no junior handoffs,
+                  ever. When that changes, this page will say so.
+                </p>
+              </div>
             </div>
           </div>
-        </Container>
-      </section>
-
-      {/* Team */}
-      <section className="bg-[#fbfbfb]">
-        <Container className="py-16 sm:py-24">
-          <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
-            The <em className="italic">team.</em>
-          </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-gray-700 sm:text-lg">
-            Right now, that&rsquo;s just Tobi. Every build, every client
-            call, every line of code on this site — one person, on purpose.
-            It&rsquo;s what keeps the standard high and the handoffs at
-            zero. When that changes, this section will say so.
-          </p>
         </Container>
       </section>
 
@@ -179,30 +141,9 @@ export default function AboutPage() {
           <div className="mt-10">
             <NumberedList items={PRINCIPLES} />
           </div>
-        </Container>
-      </section>
-
-      {/* Experience snapshot */}
-      <section className="bg-[#070707] text-white">
-        <Container className="py-16 sm:py-20">
-          <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
-            The <em className="italic">record.</em>
-          </h2>
-          <div className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
-            {RECORD.map((item) => (
-              <div key={item.stat}>
-                <p className="text-xl leading-snug font-normal sm:text-2xl">
-                  {item.stat}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-white/50">
-                  {item.detail}
-                </p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-10 text-sm text-white/40">
+          <p className="mt-10 text-sm text-gray-500">
             See the work itself in the{" "}
-            <Link href="/case-studies" className="underline underline-offset-4 hover:text-white">
+            <Link href="/case-studies" className="underline underline-offset-4 hover:text-black">
               case studies
             </Link>
             .
@@ -210,7 +151,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <ClosingCta buttonLabel="Book a Discovery Call">
+      <ClosingCta buttonLabel="Yes! Let's talk">
         If any of this sounds like your kind of work —{" "}
         <em className="italic">let&rsquo;s talk.</em>
       </ClosingCta>

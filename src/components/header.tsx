@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { href: "/launch", label: "Launch" },
   { href: "/scale", label: "Scale" },
   { href: "/enterprise", label: "Enterprise" },
-  { href: "/case-studies", label: "Work" },
+  { href: "/case-studies", label: "Results" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
@@ -57,7 +57,7 @@ export function Header() {
           </nav>
 
           <CalendlyButton variant="primary-invert" className="px-5 py-2.5 text-xs sm:px-6 sm:py-3">
-            Book a Call
+            Yes! Let&rsquo;s talk
           </CalendlyButton>
         </div>
       </header>
@@ -99,7 +99,7 @@ export function Header() {
               className="w-full"
               onClick={() => setOpen(false)}
             >
-              Book a Call
+              Yes! Let&rsquo;s talk
             </CalendlyButton>
           </div>
         </div>

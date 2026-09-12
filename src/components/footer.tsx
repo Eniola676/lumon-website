@@ -12,7 +12,7 @@ const PROGRAMS = [
 ];
 
 const COMPANY = [
-  { href: "/case-studies", label: "Work" },
+  { href: "/case-studies", label: "Results" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
@@ -110,7 +110,7 @@ export function Footer() {
               variant="outline-invert"
               className="mt-5 px-5 py-2.5 text-xs"
             >
-              Book a Call
+              Yes! Let&rsquo;s talk
             </CalendlyButton>
           </div>
         </div>

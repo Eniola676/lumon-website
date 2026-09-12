@@ -141,7 +141,7 @@ export default async function BlogPostPage({
               </p>
               <div className="mt-5">
                 <CalendlyButton variant="primary-invert" className="w-full">
-                  Book a Call
+                  Yes! Let&rsquo;s talk
                 </CalendlyButton>
               </div>
               <p className="mt-4 text-center text-xs text-white/40">

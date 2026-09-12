@@ -158,7 +158,7 @@ export default async function CaseStudyPage({
               </div>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <CalendlyButton variant="primary">Book a Discovery Call</CalendlyButton>
+                <CalendlyButton variant="primary">Yes! Let&rsquo;s talk</CalendlyButton>
                 {caseStudy.projectLink && (
                   <a
                     href={caseStudy.projectLink}
@@ -329,7 +329,7 @@ export default async function CaseStudyPage({
         </section>
       )}
 
-      <ClosingCta buttonLabel="Book a Discovery Call">
+      <ClosingCta buttonLabel="Yes! Let's get results like this">
         Want results like {caseStudy.companyName}&rsquo;s?{" "}
         <em className="italic">Let&rsquo;s talk.</em>
       </ClosingCta>

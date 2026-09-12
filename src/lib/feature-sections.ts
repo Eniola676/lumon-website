@@ -63,7 +63,7 @@ export const HOME_FEATURES: FeatureSectionContent = {
   ctaHeadline: "Want the full stack built into your business?",
   ctaSubhead:
     "Every Lumon program includes the pieces you need. Book a call and we'll map the exact system for your business.",
-  ctaButtonLabel: "Book a Discovery Call",
+  ctaButtonLabel: "Yes! Let's build my system",
 };
 
 export const LAUNCH_FEATURES: FeatureSectionContent = {
@@ -101,7 +101,7 @@ export const LAUNCH_FEATURES: FeatureSectionContent = {
   ctaHeadline: "The system, not just the course.",
   ctaSubhead:
     "This is what actually gets you paid. Book a call and we'll walk through exactly what your launch needs.",
-  ctaButtonLabel: "Book a Discovery Call",
+  ctaButtonLabel: "Yes! Let's launch my course",
 };
 
 export const SCALE_FEATURES: FeatureSectionContent = {
@@ -139,5 +139,5 @@ export const SCALE_FEATURES: FeatureSectionContent = {
   ctaHeadline: "Stop patching. Start building.",
   ctaSubhead:
     "Book a Systems Audit Call. We'll map your current stack and show you exactly what to rebuild, migrate, or kill.",
-  ctaButtonLabel: "Book a Systems Audit Call",
+  ctaButtonLabel: "Yes! Let's rebuild my systems",
 };

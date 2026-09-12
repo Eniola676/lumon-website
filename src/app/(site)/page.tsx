@@ -73,7 +73,7 @@ export default async function Home() {
           </p>
           <div className="mt-5 flex flex-col items-center gap-2 sm:mt-8 sm:gap-3">
             <CalendlyButton variant="primary-invert">
-              Book a Discovery Call
+              Yes! Let&rsquo;s build my system
             </CalendlyButton>
             <a
               href="https://www.fiverr.com/toby_techy"
@@ -226,7 +226,7 @@ export default async function Home() {
 
       <BlogSection />
 
-      <ClosingCta dark buttonLabel="Book a Discovery Call">
+      <ClosingCta dark buttonLabel="Yes! Let's build it">
         Ready to build something that <em className="italic">actually works?</em>
       </ClosingCta>
 
