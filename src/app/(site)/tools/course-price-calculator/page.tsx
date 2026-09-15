@@ -8,7 +8,7 @@ import { FORMAT_OPTIONS, CATEGORY_OPTIONS } from "@/lib/course-price-calculator/
 import { formatUSD } from "@/lib/course-price-calculator/logic";
 import { SITE_URL } from "@/lib/site";
 
-const PATH = "/tools/online-course-price-calculator";
+const PATH = "/tools/course-price-calculator";
 const PAGE_URL = `${SITE_URL}${PATH}`;
 
 export const metadata: Metadata = {
@@ -255,7 +255,7 @@ export default function CoursePriceCalculatorPage() {
                 </Link>{" "}
                 builds that system in 14 days. If you’re past your first
                 launch and scaling what already works,{" "}
-                <Link href="/scale" className="underline underline-offset-4 hover:text-black">
+                <Link href="/lumon-scale" className="underline underline-offset-4 hover:text-black">
                   Lumon Scale
                 </Link>{" "}
                 is the next step.

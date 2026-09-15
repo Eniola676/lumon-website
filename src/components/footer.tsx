@@ -7,20 +7,20 @@ import { LinkedinIcon, InstagramIcon, XIcon } from "@/components/ui/social-icons
 
 const PROGRAMS = [
   { href: "/launch", label: "Lumon Launch" },
-  { href: "/scale", label: "Lumon Scale" },
-  { href: "/enterprise", label: "Lumon Enterprise" },
+  { href: "/lumon-scale", label: "Lumon Scale" },
+  { href: "/lumon-enterprise", label: "Lumon Enterprise" },
 ];
 
 const COMPANY = [
   { href: "/case-studies", label: "Results" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
-  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/contact-us", label: "Contact" },
+  { href: "/privacy", label: "Privacy Policy" },
 ];
 
 const TOOLS_LIVE = [
-  { href: "/tools/online-course-price-calculator", label: "Course Pricing Calculator" },
+  { href: "/tools/course-price-calculator", label: "Course Pricing Calculator" },
 ];
 
 // Not built yet — shown as a preview of what's coming, not linked anywhere.

@@ -60,7 +60,7 @@ export default async function Home() {
 
         <Container className="relative flex flex-1 flex-col items-center justify-center pt-20 pb-4 text-center sm:pt-28 sm:pb-6">
           <div className="flex justify-center">
-            <div className="inline-flex flex-wrap justify-center rounded-full border border-white/25 bg-white/10 px-4 py-2 backdrop-blur-sm sm:px-5 sm:py-2.5">
+            <div className="inline-flex flex-wrap justify-center rounded-full border border-white/25 bg-white/10 px-3 py-1.5 backdrop-blur-sm sm:px-5 sm:py-2.5">
               <AiSummaryLinks />
             </div>
           </div>
@@ -162,21 +162,21 @@ export default async function Home() {
                   meta: "From $7,500",
                   description:
                     "A premium website rebuild + full course system integration, for established coaches at $10k+/month — in 6 weeks.",
-                  href: "/scale",
+                  href: "/lumon-scale",
                 },
                 {
                   title: "Lumon Enterprise",
                   meta: "From $10,000 per project",
                   description:
                     "Whitelabel builds for HR firms, L&D consultancies, and agencies. Your brand. Your credit.",
-                  href: "/enterprise",
+                  href: "/lumon-enterprise",
                 },
               ]}
             />
           </div>
           <p className="mt-8 text-sm text-gray-500">
             Not sure what your own course should cost?{" "}
-            <Link href="/tools/online-course-price-calculator" className="underline underline-offset-4 hover:text-black">
+            <Link href="/tools/course-price-calculator" className="underline underline-offset-4 hover:text-black">
               Try the free pricing calculator
             </Link>
             .
@@ -234,7 +234,7 @@ export default async function Home() {
         <Container>
           <p className="text-sm text-white/40">
             Prefer to write first?{" "}
-            <Link href="/contact" className="underline underline-offset-4 hover:text-white">
+            <Link href="/contact-us" className="underline underline-offset-4 hover:text-white">
               Send us a message
             </Link>{" "}
             instead.

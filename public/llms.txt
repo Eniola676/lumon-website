@@ -6,13 +6,13 @@ Lumon Studios is a specialist web studio that builds course systems, sales funne
 
 - [Homepage](https://www.lumonstudio.xyz/): Overview of Lumon Studios' value proposition, service tiers, client logos, featured work, testimonials, and ideal client profile.
 - [About](https://www.lumonstudio.xyz/about): Studio origin story, founding principles, team philosophy (small, senior, no handoffs), and track record (100+ builds, international clients, engineering background).
-- [Contact](https://www.lumonstudio.xyz/contact): Contact form, 30-minute discovery call booking via Calendly, direct email (tobi@lumonstudiomail.com), LinkedIn, and response time commitment (one business day).
+- [Contact](https://www.lumonstudio.xyz/contact-us): Contact form, 30-minute discovery call booking via Calendly, direct email (tobi@lumonstudiomail.com), LinkedIn, and response time commitment (one business day).
 
 ## Services
 
 - [Lumon Launch](https://www.lumonstudio.xyz/launch): A professional website + course launch system for experts launching their first paid program. Includes course site, payment infrastructure (Stripe/PayPal), basic automation (email sequences, lead capture), and launch handoff. From $2,500, delivered in 14 days.
-- [Lumon Scale](https://www.lumonstudio.xyz/scale): A premium website rebuild + full course system integration for established coaches at $10k+/month. Includes systems audit, CRM architecture (HubSpot, GoHighLevel), pipeline design, automation build, website upgrade (Webflow/WordPress), and zero-downtime migration. From $7,500, delivered in 6 weeks.
-- [Lumon Enterprise](https://www.lumonstudio.xyz/enterprise): Whitelabel course systems and learning platforms for HR consultancies, L&D firms, and agencies. Full NDA and whitelabel agreement, source file delivery, no client-facing attribution. Projects from $10,000, retainers from $2,000/month.
+- [Lumon Scale](https://www.lumonstudio.xyz/lumon-scale): A premium website rebuild + full course system integration for established coaches at $10k+/month. Includes systems audit, CRM architecture (HubSpot, GoHighLevel), pipeline design, automation build, website upgrade (Webflow/WordPress), and zero-downtime migration. From $7,500, delivered in 6 weeks.
+- [Lumon Enterprise](https://www.lumonstudio.xyz/lumon-enterprise): Whitelabel course systems and learning platforms for HR consultancies, L&D firms, and agencies. Full NDA and whitelabel agreement, source file delivery, no client-facing attribution. Projects from $10,000, retainers from $2,000/month.
 
 ## Blog & Resources
 

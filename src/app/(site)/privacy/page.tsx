@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy — Lumon Studios",
   description:
     "How Lumon Studios collects and uses visitor data on lumonstudio.xyz.",
-  alternates: { canonical: "/privacy-policy" },
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPolicyPage() {

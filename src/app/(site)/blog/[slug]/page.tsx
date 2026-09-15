@@ -10,7 +10,7 @@ import { ShareLinks } from "@/components/blog/share-links";
 import { PostCard } from "@/components/blog/post-card";
 import { getPortableTextComponents } from "@/components/blog/portable-text-components";
 import { LinkedinIcon, PinterestIcon } from "@/components/ui/social-icons";
-import { getAllSlugs, getPostBySlug, getRelatedPosts } from "@/lib/blog";
+import { getAllSlugs, getPostBySlug, getRelatedPosts, slugifyCategory } from "@/lib/blog";
 import { getHeadingIds, getToc } from "@/lib/blog-content";
 import { formatPostDate } from "@/lib/format-date";
 import { SITE_URL } from "@/lib/site";
@@ -146,12 +146,12 @@ export default async function BlogPostPage({
               </div>
               <p className="mt-4 text-center text-xs text-white/40">
                 Prefer email?{" "}
-                <Link href="/contact" className="underline underline-offset-2 hover:text-white">
+                <Link href="/contact-us" className="underline underline-offset-2 hover:text-white">
                   Get in touch
                 </Link>
                 . Or see what your course should{" "}
                 <Link
-                  href="/tools/online-course-price-calculator"
+                  href="/tools/course-price-calculator"
                   className="underline underline-offset-2 hover:text-white"
                 >
                   cost
@@ -164,7 +164,18 @@ export default async function BlogPostPage({
           {/* Article */}
           <article className="lg:order-2">
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <p className="font-mono text-xs tracking-wide text-gray-500 uppercase">
+              <p className="flex items-center gap-2 font-mono text-xs tracking-wide text-gray-500 uppercase">
+                {post.category && (
+                  <>
+                    <Link
+                      href={`/blog/category/${slugifyCategory(post.category)}`}
+                      className="hover:text-black hover:underline"
+                    >
+                      {post.category}
+                    </Link>
+                    <span aria-hidden>·</span>
+                  </>
+                )}
                 Last updated: {formatPostDate(post.publishedAt)}
               </p>
               <ShareLinks url={url} title={post.title} />

@@ -10,7 +10,7 @@
 // previously submitted to Google Search Console / Bing Webmaster Tools at
 // the old URL, resubmit it there at the new /sitemap1.xml address.
 import { SITE_URL } from "@/lib/site";
-import { getCategories, getSitemapPosts } from "@/lib/blog";
+import { getCategories, getSitemapPosts, slugifyCategory } from "@/lib/blog";
 import { getSitemapCaseStudies } from "@/lib/case-studies";
 
 export const revalidate = 3600;
@@ -31,14 +31,14 @@ type Entry = {
 const PAGES: Array<{ path: string; changeFrequency: ChangeFreq; priority: number }> = [
   { path: "", changeFrequency: "monthly", priority: 1 },
   { path: "/launch", changeFrequency: "monthly", priority: 0.9 },
-  { path: "/scale", changeFrequency: "monthly", priority: 0.9 },
-  { path: "/enterprise", changeFrequency: "monthly", priority: 0.9 },
-  { path: "/tools/online-course-price-calculator", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/lumon-scale", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/lumon-enterprise", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/tools/course-price-calculator", changeFrequency: "monthly", priority: 0.8 },
   { path: "/blog", changeFrequency: "weekly", priority: 0.8 },
   { path: "/case-studies", changeFrequency: "weekly", priority: 0.8 },
   { path: "/about", changeFrequency: "monthly", priority: 0.6 },
-  { path: "/contact", changeFrequency: "monthly", priority: 0.7 },
-  { path: "/privacy-policy", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/contact-us", changeFrequency: "monthly", priority: 0.7 },
+  { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
 ];
 
 function escapeXml(value: string): string {
@@ -95,7 +95,7 @@ export async function GET() {
   }));
 
   const categoryEntries: Entry[] = categories.map((category) => ({
-    url: `${SITE_URL}/blog/category/${encodeURIComponent(category)}`,
+    url: `${SITE_URL}/blog/category/${slugifyCategory(category)}`,
     lastModified,
     changeFrequency: "weekly",
     priority: 0.5,

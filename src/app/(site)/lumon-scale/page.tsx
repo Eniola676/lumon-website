@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Lumon Scale — Lumon Studios",
   description:
     "A premium website rebuild + full course system integration for established coaches doing $10k+/month. CRM, pipelines, and automation — in 6 weeks with zero downtime. From $7,500.",
-  alternates: { canonical: "/scale" },
+  alternates: { canonical: "/lumon-scale" },
 };
 
 export default async function ScalePage() {

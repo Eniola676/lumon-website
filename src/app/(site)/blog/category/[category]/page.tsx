@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { BlogListing } from "@/components/blog/blog-listing";
+import { getCategoryBySlug } from "@/lib/blog";
 
 export const revalidate = 3600;
 
@@ -8,12 +10,14 @@ export async function generateMetadata({
 }: {
   params: Promise<{ category: string }>;
 }): Promise<Metadata> {
-  const { category } = await params;
-  const name = decodeURIComponent(category);
+  const { category: slug } = await params;
+  const category = await getCategoryBySlug(slug);
+  if (!category) return {};
+
   return {
-    title: `${name} — Blog — Lumon Studios`,
-    description: `Articles about ${name} from Lumon Studios.`,
-    alternates: { canonical: `/blog/category/${category}` },
+    title: `${category} — Blog — Lumon Studios`,
+    description: `Articles about ${category} from Lumon Studios.`,
+    alternates: { canonical: `/blog/category/${slug}` },
   };
 }
 
@@ -22,6 +26,9 @@ export default async function BlogCategoryPage({
 }: {
   params: Promise<{ category: string }>;
 }) {
-  const { category } = await params;
-  return <BlogListing page={1} category={decodeURIComponent(category)} />;
+  const { category: slug } = await params;
+  const category = await getCategoryBySlug(slug);
+  if (!category) notFound();
+
+  return <BlogListing page={1} category={category} />;
 }

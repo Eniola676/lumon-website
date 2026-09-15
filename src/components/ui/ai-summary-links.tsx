@@ -17,11 +17,11 @@ export function AiSummaryLinks({
   const isDark = variant === "dark";
 
   return (
-    <div className="flex flex-wrap items-center gap-4">
-      <span className={`text-sm ${isDark ? "text-white/50" : "text-gray-500"}`}>
+    <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+      <span className={`text-xs sm:text-sm ${isDark ? "text-white/50" : "text-gray-500"}`}>
         {label}
       </span>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1.5 sm:gap-3">
         {AI_TOOLS.map((tool) => (
           <button
             key={tool.name}
@@ -29,7 +29,7 @@ export function AiSummaryLinks({
             onClick={() => openTool(tool.buildUrl)}
             aria-label={`Summarize this page with ${tool.name}`}
             title={`Summarize this page with ${tool.name}`}
-            className={`flex size-8 items-center justify-center rounded-lg transition-colors ${
+            className={`flex size-6 items-center justify-center rounded-lg transition-colors sm:size-8 ${
               isDark
                 ? "bg-white/10 hover:bg-white/20"
                 : "bg-[#fbfbfb] hover:bg-[#e9e9ea]"
@@ -40,7 +40,7 @@ export function AiSummaryLinks({
               src={tool.icon}
               alt=""
               loading="lazy"
-              className={`size-4 ${isDark ? "[filter:brightness(0)_invert(1)]" : ""}`}
+              className={`size-3 sm:size-4 ${isDark ? "[filter:brightness(0)_invert(1)]" : ""}`}
             />
           </button>
         ))}

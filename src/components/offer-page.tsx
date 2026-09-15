@@ -168,7 +168,7 @@ export function OfferPage({
             <p className="mt-8 text-sm text-gray-500">
               Not sure this is the right price point?{" "}
               <Link
-                href="/tools/online-course-price-calculator"
+                href="/tools/course-price-calculator"
                 className="underline underline-offset-4 hover:text-black"
               >
                 Try the free course pricing calculator
@@ -215,7 +215,7 @@ export function OfferPage({
               <Faq items={offer.faqItems} />
               <p className="mt-8 text-sm text-gray-500">
                 Something else on your mind?{" "}
-                <Link href="/contact" className="underline underline-offset-4 hover:text-black">
+                <Link href="/contact-us" className="underline underline-offset-4 hover:text-black">
                   Ask us directly
                 </Link>
                 .

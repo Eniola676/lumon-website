@@ -128,6 +128,27 @@ export async function getCategories(): Promise<string[]> {
   }
 }
 
+// Clean, crawlable category URLs — "Course Platforms" -> "course-platforms" —
+// instead of URL-encoding the raw category name straight into the path
+// (which previously produced ugly, non-standard URLs like
+// /blog/category/Course%20Platforms). Categories aren't a separate Sanity
+// document with their own slug field, just a fixed string on each post, so
+// the slug is derived here and matched back against the live category list
+// rather than stored anywhere.
+export function slugifyCategory(category: string): string {
+  return category
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-+|-+$)/g, "");
+}
+
+export async function getCategoryBySlug(slug: string): Promise<string | null> {
+  const categories = await getCategories();
+  return categories.find((category) => slugifyCategory(category) === slug) ?? null;
+}
+
 export async function getAllSlugs(): Promise<string[]> {
   if (!sanityClient) return [];
 

@@ -8,12 +8,12 @@ import { CalendlyButton } from "@/components/ui/calendly-button";
 
 const NAV_LINKS = [
   { href: "/launch", label: "Launch" },
-  { href: "/scale", label: "Scale" },
-  { href: "/enterprise", label: "Enterprise" },
+  { href: "/lumon-scale", label: "Scale" },
+  { href: "/lumon-enterprise", label: "Enterprise" },
   { href: "/case-studies", label: "Results" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/contact-us", label: "Contact" },
 ];
 
 export function Header() {

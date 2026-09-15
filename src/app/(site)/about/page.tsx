@@ -160,7 +160,7 @@ export default function AboutPage() {
         <Container>
           <p className="text-sm text-gray-500">
             Prefer to write first?{" "}
-            <Link href="/contact" className="underline underline-offset-4 hover:text-black">
+            <Link href="/contact-us" className="underline underline-offset-4 hover:text-black">
               Send us a message
             </Link>{" "}
             instead.

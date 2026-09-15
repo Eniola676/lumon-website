@@ -2,10 +2,10 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { PostCard } from "@/components/blog/post-card";
-import { getCategories, getPosts } from "@/lib/blog";
+import { getCategories, getPosts, slugifyCategory } from "@/lib/blog";
 
 function categoryHref(category: string) {
-  return `/blog/category/${encodeURIComponent(category)}`;
+  return `/blog/category/${slugifyCategory(category)}`;
 }
 
 function pageHref({
