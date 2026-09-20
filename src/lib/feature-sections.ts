@@ -2,6 +2,7 @@ import {
   Globe,
   GraduationCap,
   Mail,
+  MapPin,
   ShieldCheck,
   LayoutDashboard,
   Sparkles,
@@ -64,6 +65,48 @@ export const HOME_FEATURES: FeatureSectionContent = {
   ctaSubhead:
     "Every Lumon program includes the pieces you need. Book a call and we'll map the exact system for your business.",
   ctaButtonLabel: "Yes! Let's build my system",
+};
+
+// Same shape as HOME_FEATURES, for the niche-agnostic Website Design &
+// Development page — three tiles were already generic enough to reuse
+// verbatim; only the two course-specific ones (curriculum, cart abandonment)
+// got reworked for a local/small-business audience.
+export const WEBSITE_DESIGN_FEATURES: FeatureSectionContent = {
+  eyebrow: "Everything We Build",
+  headline: "The full machine, not just the shopfront.",
+  subhead:
+    "A website gets you seen. These pieces get you chosen. Every build includes the components that turn visitors into customers.",
+  tiles: [
+    {
+      icon: Globe,
+      title: "A website that actually sells.",
+      body: "Custom-designed, mobile-first, built on Webflow, WordPress, or the platform that fits your business. Not a template. Not a landing page dressed up as a site.",
+    },
+    {
+      icon: MapPin,
+      title: "Found by the people already looking for you.",
+      body: "Google Business Profile connected, local keywords built into every page, structured data search engines can actually read. When someone nearby searches for what you do, you show up.",
+    },
+    {
+      icon: Mail,
+      title: "Leads that get followed up on automatically.",
+      body: "Welcome emails, quote-request follow-ups, review requests after the job's done. Every email your business needs, written and automated, so no lead goes cold waiting on you.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Every button tested before you ever see it.",
+      body: "Payments verified. Automations fired end-to-end. Links checked. If a piece only works in theory, it doesn't ship — you get a site that works the day it goes live, not a demo you have to debug yourself.",
+    },
+    {
+      icon: LayoutDashboard,
+      title: "One dashboard. Every lead. Every sale.",
+      body: "A single source of truth for who your leads are, where they came from, and where they are in your funnel. So you stop guessing what's working and start knowing.",
+    },
+  ],
+  ctaHeadline: "Want this built into your business?",
+  ctaSubhead:
+    "Every build includes the pieces you need to actually get found and get chosen. Book a call and we'll map what your business needs.",
+  ctaButtonLabel: "Yes! Let's build my website",
 };
 
 export const LAUNCH_FEATURES: FeatureSectionContent = {

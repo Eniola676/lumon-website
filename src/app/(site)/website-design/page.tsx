@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { X, ArrowUpRight } from "lucide-react";
+import { X } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { CalendlyButton } from "@/components/ui/calendly-button";
 import { NumberedList } from "@/components/ui/numbered-list";
 import { Checklist } from "@/components/ui/checklist";
-import { WorkCard } from "@/components/ui/work-card";
 import { WorkCardMarquee } from "@/components/ui/work-card-marquee";
 import { ClosingCta } from "@/components/ui/closing-cta";
 import { MarqueeLogoScroller } from "@/components/ui/marquee-logo-scroller";
@@ -17,27 +16,32 @@ import { TestimonialWall } from "@/components/testimonial-wall";
 import { PLATFORM_LOGOS } from "@/lib/platform-logos";
 import { CLIENTS } from "@/lib/clients";
 import { getFeaturedCaseStudies, caseStudyToWorkItem } from "@/lib/case-studies";
-import { HOME_FEATURES } from "@/lib/feature-sections";
+import { WEBSITE_DESIGN_FEATURES } from "@/lib/feature-sections";
 
+// Same page as the homepage, section for section — just not aimed at any
+// one niche. The homepage speaks to coaches specifically; this is the
+// general "website design & development for local and small businesses"
+// version for traffic that isn't coaching-specific (local SEO, ads, direct
+// referrals for plain web work).
 const FAILURE_LIST = [
-  "Six months comparing Kajabi, Thinkific, Teachable, and Podia",
-  "Videos recorded, sitting in a Drive folder, no structure around them",
-  "Launching without a proven, scalable system for acquiring students",
-  "Email automations built in three tools that don't talk to each other",
-  "Platform-hopped twice after getting stuck, started over both times",
-  "An audience that asked twice and stopped asking",
+  "Months comparing Wix, Squarespace, and GoDaddy templates",
+  "A logo and a color palette, no strategy behind either",
+  "A site that looks fine on desktop and breaks on mobile",
+  "No way to tell which page actually brings in calls or bookings",
+  "A contact form that goes straight to a folder nobody checks",
+  "Customers searching nearby find a competitor instead, because nothing was set up for local search",
 ];
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Lumon Studios — Course systems for coaches who mean business.",
+  title: "Website Design & Development — Lumon Studios",
   description:
-    "Custom-built platforms, funnels, and websites for coaches, consultants, and training organisations. No templates. No handoffs. Just work that quietly does its job.",
-  alternates: { canonical: "/" },
+    "Custom website design and development for local and small businesses. No templates, no niche restrictions — just a site built to get you found and get you chosen.",
+  alternates: { canonical: "/website-design" },
 };
 
-export default async function Home() {
+export default async function WebsiteDesignPage() {
   const caseStudies = await getFeaturedCaseStudies();
   const workItems = caseStudies.length > 0 ? caseStudies.map(caseStudyToWorkItem) : CLIENTS;
 
@@ -45,12 +49,6 @@ export default async function Home() {
     <>
       {/* Hero */}
       <section className="relative flex min-h-[90vh] flex-col overflow-hidden bg-[#3d7cc9] text-white sm:min-h-[95vh]">
-        {/*
-          TODO: swap this placeholder for the real sky/clouds background image.
-          Drop the file in /public (e.g. /public/hero-sky.jpg) and replace
-          everything in this comment block's sibling divs with a single:
-          <div className="absolute inset-0 bg-[url('/hero-sky.jpg')] bg-cover bg-center" />
-        */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#4a8ad9] via-[#6ba3e0] to-[#a9c9ec]" />
         {/* soft cloud blobs */}
         <div className="absolute top-[8%] left-[8%] h-56 w-96 rounded-full bg-white/80 blur-3xl" />
@@ -67,14 +65,14 @@ export default async function Home() {
           </div>
 
           <h1 className="mx-auto mt-4 max-w-3xl text-4xl leading-[1.1] font-black tracking-tight uppercase sm:mt-6 sm:max-w-3xl sm:text-5xl lg:max-w-5xl lg:text-6xl">
-            Monetize Your Expertise with a Premium Website & Course
+            Websites That Get Local Businesses Chosen First
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-white/85 sm:mt-5 sm:text-lg">
-            The infrastructure behind coaching businesses that actually make money.
+            The infrastructure behind small businesses that actually make money.
           </p>
           <div className="mt-5 flex flex-col items-center gap-2 sm:mt-8 sm:gap-3">
             <CalendlyButton variant="primary-invert">
-              Yes! Let&rsquo;s build my system
+              Yes! Let&rsquo;s build my website
             </CalendlyButton>
             <a
               href="https://www.fiverr.com/toby_techy"
@@ -104,25 +102,27 @@ export default async function Home() {
             <div>
               <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
                 The actual first step is never{" "}
-                <em className="italic">building the course itself.</em>
+                <em className="italic">picking a template.</em>
               </h2>
               <p className="mt-6 text-base leading-relaxed text-gray-600 sm:text-lg">
-                Most courses stall out long before the final edit. The real
-                failure happens earlier, when creators focus on producing
-                content prior to validating their target buyer, core
-                promise, price point, and launch strategy. Typically, the
-                cycle unfolds like this:
+                Most small-business websites stall out long before launch —
+                or worse, launch and change nothing. The real failure happens
+                earlier, when owners jump straight to a website builder
+                before deciding who the site is actually for, what makes
+                them the better choice, and how someone finds them in the
+                first place. Typically, the cycle unfolds like this:
               </p>
               <div className="mt-8 border-l-2 border-black pl-6">
                 <p className="font-mono text-xs tracking-wide text-gray-500 uppercase">
                   My view
                 </p>
                 <p className="mt-3 text-base leading-relaxed text-gray-800 sm:text-lg">
-                  Most coaches don&rsquo;t need six months of strategy before
-                  they build. Expertise is real. The risk is spending months
-                  producing a product before a single buyer has proven they
-                  want it. Start with proof. Build what sells. Operate what
-                  works.
+                  Most small business owners don&rsquo;t need six months of
+                  branding exercises before they build. What you do is real.
+                  The risk is spending months on a logo and color palette
+                  before a single customer has proven the site actually gets
+                  them to call. Start with proof. Build what gets chosen.
+                  Operate what works.
                 </p>
               </div>
             </div>
@@ -142,50 +142,44 @@ export default async function Home() {
       <section className="bg-[#fbfbfb]">
         <Container className="py-16 sm:py-24">
           <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
-            Three ways <em className="italic">we work.</em>
+            What actually gets <em className="italic">built.</em>
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 sm:text-lg">
-            Everything Lumon Studios builds falls into three programs — each
-            for a different stage of your business.
+            Every website design and development project includes the pieces
+            that turn visitors into customers.
           </p>
           <div className="mt-10">
             <NumberedList
               items={[
                 {
-                  title: "Lumon Launch",
-                  meta: "From $2,500",
+                  title: "Custom Design & Build",
                   description:
-                    "A professional website + course launch system, for experts launching their first paid program — in 14 days.",
-                  href: "/launch",
+                    "A site designed around your actual business — not a template with your logo swapped in. Mobile-first, fast, and built on the platform that fits: Webflow, WordPress, Squarespace, or custom.",
                 },
                 {
-                  title: "Lumon Scale",
-                  meta: "From $7,500",
+                  title: "Local SEO, Built In",
                   description:
-                    "A premium website rebuild + full course system integration, for established coaches at $10k+/month — in 6 weeks.",
-                  href: "/lumon-scale",
+                    "Google Business Profile connected, local keywords in place, structured data search engines can actually read. When someone nearby searches for what you do, you show up.",
                 },
                 {
-                  title: "Lumon Enterprise",
-                  meta: "From $10,000 per project",
+                  title: "Lead Capture That Works",
                   description:
-                    "Whitelabel builds for HR firms, L&D consultancies, and agencies. Your brand. Your credit.",
-                  href: "/lumon-enterprise",
+                    "Contact forms that notify you immediately, click-to-call buttons that work on mobile, booking or quote-request flows — whatever gets a visitor to actually reach out.",
                 },
               ]}
             />
           </div>
           <p className="mt-8 text-sm text-gray-500">
-            Not sure what your own course should cost?{" "}
-            <Link href="/tools/course-price-calculator" className="underline underline-offset-4 hover:text-black">
-              Try the free pricing calculator
+            Not sure what your project should cost?{" "}
+            <Link href="/contact-us" className="underline underline-offset-4 hover:text-black">
+              Let&rsquo;s talk about your business
             </Link>
             .
           </p>
         </Container>
       </section>
 
-      <FeatureSection {...HOME_FEATURES} />
+      <FeatureSection {...WEBSITE_DESIGN_FEATURES} />
 
       {/* Trust bar */}
       <section className="bg-white">
@@ -198,37 +192,6 @@ export default async function Home() {
         </Container>
       </section>
 
-      {/* Case studies */}
-      {caseStudies.length > 0 && (
-        <section className="bg-[#fbfbfb]">
-          <Container className="py-16 sm:py-24">
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
-                  Real businesses. <em className="italic">Real results.</em>
-                </h2>
-                <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 sm:text-lg">
-                  A closer look at the systems behind the work — the
-                  challenge, the build, and what changed.
-                </p>
-              </div>
-              <Link
-                href="/case-studies"
-                className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-gray-600 hover:text-black"
-              >
-                View all case studies
-                <ArrowUpRight className="size-4" />
-              </Link>
-            </div>
-            <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {caseStudies.slice(0, 3).map((caseStudy) => (
-                <WorkCard key={caseStudy.id} {...caseStudyToWorkItem(caseStudy)} />
-              ))}
-            </div>
-          </Container>
-        </section>
-      )}
-
       <TestimonialWall />
 
       {/* Who we work with */}
@@ -240,16 +203,16 @@ export default async function Home() {
                 The right fit for <em className="italic">Lumon Studios.</em>
               </h2>
               <p className="mt-6 text-base leading-relaxed text-gray-600 sm:text-lg">
-                Coaches, consultants, and training organisations who take
-                their business seriously — and want the tech to match. If any
-                of this describes you, we should talk:
+                Local and small businesses who take their business seriously
+                — and want a website that matches. If any of this describes
+                you, we should talk:
               </p>
             </div>
             <Checklist
               items={[
-                "You have expertise worth teaching and want to package it into a course that actually sells.",
-                "Your business has grown past the point where duct tape and Zapier can hold it together.",
-                "You run an agency or firm that delivers training solutions to your own clients and need a partner behind the scenes.",
+                "You run a real business — a shop, a practice, a service, a studio — and your website doesn't reflect it.",
+                "You're tired of a DIY builder site that looks like everyone else's.",
+                "You want a site that actually brings in calls, bookings, or walk-ins — not just something to point people to.",
               ]}
             />
           </div>
@@ -258,8 +221,8 @@ export default async function Home() {
 
       <BlogSection />
 
-      <ClosingCta dark buttonLabel="Yes! Let's build it">
-        Ready to build something that <em className="italic">actually works?</em>
+      <ClosingCta dark buttonLabel="Yes! Let's build my website">
+        Ready to build something that <em className="italic">actually gets you chosen?</em>
       </ClosingCta>
 
       <section className="bg-[#070707] pb-16 text-center">

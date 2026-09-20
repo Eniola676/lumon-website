@@ -33,6 +33,7 @@ const PAGES: Array<{ path: string; changeFrequency: ChangeFreq; priority: number
   { path: "/launch", changeFrequency: "monthly", priority: 0.9 },
   { path: "/lumon-scale", changeFrequency: "monthly", priority: 0.9 },
   { path: "/lumon-enterprise", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/website-design", changeFrequency: "monthly", priority: 0.9 },
   { path: "/tools/course-price-calculator", changeFrequency: "monthly", priority: 0.8 },
   { path: "/blog", changeFrequency: "weekly", priority: 0.8 },
   { path: "/case-studies", changeFrequency: "weekly", priority: 0.8 },
