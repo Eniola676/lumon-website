@@ -39,7 +39,11 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const caseStudies = await getFeaturedCaseStudies();
-  const workItems = caseStudies.length > 0 ? caseStudies.map(caseStudyToWorkItem) : CLIENTS;
+  // Hero marquee stays pinned to the original curated roster regardless of
+  // what's marked "featured" in Sanity — only the dedicated Case Studies
+  // section below reacts to that flag. Keeps the hero's photo set stable
+  // even as real case studies get featured/unfeatured over time.
+  const workItems = CLIENTS;
 
   return (
     <>

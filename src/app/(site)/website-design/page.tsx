@@ -3,7 +3,8 @@ import Link from "next/link";
 import { X } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { CalendlyButton } from "@/components/ui/calendly-button";
-import { NumberedList } from "@/components/ui/numbered-list";
+import { AnimatedServiceList } from "@/components/ui/animated-service-list";
+import { DesignBuildIcon, LocalSeoIcon, LeadCaptureIcon } from "@/components/ui/service-icons";
 import { Checklist } from "@/components/ui/checklist";
 import { WorkCardMarquee } from "@/components/ui/work-card-marquee";
 import { ClosingCta } from "@/components/ui/closing-cta";
@@ -149,19 +150,22 @@ export default async function WebsiteDesignPage() {
             that turn visitors into customers.
           </p>
           <div className="mt-10">
-            <NumberedList
+            <AnimatedServiceList
               items={[
                 {
+                  icon: DesignBuildIcon,
                   title: "Custom Design & Build",
                   description:
                     "A site designed around your actual business — not a template with your logo swapped in. Mobile-first, fast, and built on the platform that fits: Webflow, WordPress, Squarespace, or custom.",
                 },
                 {
+                  icon: LocalSeoIcon,
                   title: "Local SEO, Built In",
                   description:
                     "Google Business Profile connected, local keywords in place, structured data search engines can actually read. When someone nearby searches for what you do, you show up.",
                 },
                 {
+                  icon: LeadCaptureIcon,
                   title: "Lead Capture That Works",
                   description:
                     "Contact forms that notify you immediately, click-to-call buttons that work on mobile, booking or quote-request flows — whatever gets a visitor to actually reach out.",
