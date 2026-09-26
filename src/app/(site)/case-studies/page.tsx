@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
 import { WorkCard } from "@/components/ui/work-card";
+import Link from "next/link";
 import { getAllCaseStudies, caseStudyToWorkItem } from "@/lib/case-studies";
+import { getAllIndustries } from "@/lib/industries";
 
 export const revalidate = 3600;
 
@@ -13,7 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default async function CaseStudiesPage() {
-  const caseStudies = await getAllCaseStudies();
+  const [caseStudies, allIndustries] = await Promise.all([getAllCaseStudies(), getAllIndustries()]);
+  const industries = allIndustries.filter((industry) => industry.projectCount > 0);
 
   return (
     <section className="bg-white">
@@ -26,6 +29,23 @@ export default async function CaseStudiesPage() {
           Course systems, funnels, and websites built for coaches,
           consultants, and training organisations.
         </p>
+
+        {industries.length > 0 && (
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <span className="font-mono text-xs tracking-wide text-gray-500 uppercase">
+              Browse by industry
+            </span>
+            {industries.map((industry) => (
+              <Link
+                key={industry.id}
+                href={`/industries/${industry.slug}`}
+                className="rounded-full border border-[#e9e9ea] bg-[#fbfbfb] px-4 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:border-black"
+              >
+                {industry.title}
+              </Link>
+            ))}
+          </div>
+        )}
 
         {caseStudies.length > 0 ? (
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

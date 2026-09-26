@@ -91,6 +91,15 @@ export const caseStudy = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "industries",
+      title: "Industries",
+      description: "Which industries this project belongs to. It will be listed on each industry's page.",
+      type: "array",
+      group: "content",
+      of: [defineArrayMember({ type: "reference", to: [{ type: "industry" }] })],
+      validation: (Rule) => Rule.unique(),
+    }),
+    defineField({
       name: "toolsUsed",
       title: "Tools used",
       type: "array",
@@ -214,7 +223,10 @@ export const caseStudy = defineType({
           name: "alt",
           type: "string",
           title: "Alt text",
-          validation: (Rule) => Rule.required(),
+          validation: (Rule) =>
+        Rule.required().custom((value) =>
+          (value as { asset?: unknown } | undefined)?.asset ? true : "Upload the client image (alt text alone is not enough)"
+        ),
         },
       ],
       validation: (Rule) => Rule.required(),
@@ -231,7 +243,10 @@ export const caseStudy = defineType({
           name: "alt",
           type: "string",
           title: "Alt text",
-          validation: (Rule) => Rule.required(),
+          validation: (Rule) =>
+        Rule.required().custom((value) =>
+          (value as { asset?: unknown } | undefined)?.asset ? true : "Upload the cover image (alt text alone is not enough)"
+        ),
         },
       ],
       validation: (Rule) => Rule.required(),
@@ -306,6 +321,20 @@ export const caseStudy = defineType({
       type: "boolean",
       initialValue: false,
       group: "meta",
+    }),
+    defineField({
+      name: "brandColor",
+      title: "Brand colour (Website Design page)",
+      description:
+        "Hex colour the project's row turns into when hovered on the /website-design page, e.g. #E8684A. Use the client's main brand colour. Text switches between white and black automatically for contrast. Blank falls back to Lumon blue.",
+      type: "string",
+      group: "meta",
+      hidden: ({ document }) => !document?.featuredOnWebsiteDesign,
+      validation: (Rule) =>
+        Rule.regex(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, {
+          name: "hex colour",
+          invert: false,
+        }).error("Use a hex colour like #E8684A"),
     }),
     defineField({
       name: "metaDescription",

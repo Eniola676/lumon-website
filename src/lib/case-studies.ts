@@ -54,7 +54,10 @@ export type CaseStudyCard = {
   publishedAt: string;
 };
 
+export type CaseStudyIndustry = { title: string; slug: string };
+
 export type CaseStudyFull = CaseStudyCard & {
+  industries?: CaseStudyIndustry[];
   projectLink?: string;
   toolsUsed?: CaseStudyTool[];
   gallery?: CaseStudyGalleryItem[];
@@ -105,6 +108,7 @@ export async function getFeaturedCaseStudies(limit = 6): Promise<CaseStudyCard[]
 export type WebsiteDesignCaseStudy = CaseStudyCard & {
   tools?: string[];
   previewImages?: CaseStudyImage[];
+  brandColor?: string;
 };
 
 export async function getWebsiteDesignCaseStudies(limit = 8): Promise<WebsiteDesignCaseStudy[]> {
@@ -115,12 +119,27 @@ export async function getWebsiteDesignCaseStudies(limit = 8): Promise<WebsiteDes
       `*[${PUBLISHED_FILTER} && featuredOnWebsiteDesign == true] | order(publishedAt desc) [0...$limit] {
         ${CARD_FIELDS},
         "tools": toolsUsed[].name,
+        brandColor,
         "previewImages": gallery[_type == "image"][0...2]
       }`,
       { limit }
     );
   } catch (err) {
     console.error("getWebsiteDesignCaseStudies failed", err);
+    return [];
+  }
+}
+
+export async function getCaseStudiesByIndustry(industryId: string): Promise<CaseStudyCard[]> {
+  if (!sanityClient) return [];
+
+  try {
+    return await sanityClient.fetch<CaseStudyCard[]>(
+      `*[${PUBLISHED_FILTER} && $industryId in industries[]._ref] | order(publishedAt desc) { ${CARD_FIELDS} }`,
+      { industryId }
+    );
+  } catch (err) {
+    console.error("getCaseStudiesByIndustry failed", err);
     return [];
   }
 }
@@ -163,6 +182,7 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudyFull | 
       `*[${PUBLISHED_FILTER} && slug.current == $slug][0] {
         ${CARD_FIELDS},
         projectLink,
+        "industries": industries[]->{ title, "slug": slug.current },
         toolsUsed,
         gallery[]{
           ...,

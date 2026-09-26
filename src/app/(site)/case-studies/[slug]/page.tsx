@@ -171,19 +171,34 @@ export default async function CaseStudyPage({
           <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_320px] lg:gap-16">
             <div>
               <p className="font-mono text-xs tracking-wide text-gray-500 uppercase">Case Study</p>
+              {caseStudy.industries && caseStudy.industries.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {caseStudy.industries.map((industry) => (
+                    <Link
+                      key={industry.slug}
+                      href={`/industries/${industry.slug}`}
+                      className="rounded-full border border-[#e9e9ea] bg-[#fbfbfb] px-3 py-1 text-xs font-medium text-gray-700 transition-colors hover:border-black"
+                    >
+                      {industry.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
               <h1 className="mt-3 text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
                 {offerLabel} <em className="italic">for {caseStudy.companyName}.</em>
               </h1>
 
               <div className="mt-6 flex items-center gap-3">
-                <div className="relative size-11 shrink-0 overflow-hidden rounded-full bg-[#fbfbfb]">
-                  <Image
-                    src={urlFor(caseStudy.clientImage).width(88).height(88).fit("crop").auto("format").url()}
-                    alt={caseStudy.clientImage.alt ?? caseStudy.clientName}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                {Boolean((caseStudy.clientImage as { asset?: unknown }).asset) && (
+                  <div className="relative size-11 shrink-0 overflow-hidden rounded-full bg-[#fbfbfb]">
+                    <Image
+                      src={urlFor(caseStudy.clientImage).width(88).height(88).fit("crop").auto("format").url()}
+                      alt={caseStudy.clientImage.alt ?? caseStudy.clientName}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
                 <div>
                   <p className="text-sm font-medium">{caseStudy.clientName}</p>
                   {caseStudy.clientRole && (

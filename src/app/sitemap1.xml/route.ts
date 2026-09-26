@@ -12,6 +12,7 @@
 import { SITE_URL } from "@/lib/site";
 import { getCategories, getSitemapPosts, slugifyCategory } from "@/lib/blog";
 import { getSitemapCaseStudies } from "@/lib/case-studies";
+import { getSitemapIndustries } from "@/lib/industries";
 
 export const revalidate = 3600;
 
@@ -82,10 +83,11 @@ export async function GET() {
 
   // Posts, categories, and case studies are sourced live from Sanity so new
   // content gets discovered without a manual sitemap update.
-  const [posts, categories, caseStudies] = await Promise.all([
+  const [posts, categories, caseStudies, industries] = await Promise.all([
     getSitemapPosts(),
     getCategories(),
     getSitemapCaseStudies(),
+    getSitemapIndustries(),
   ]);
 
   const postEntries: Entry[] = posts.map((post) => ({
@@ -109,7 +111,31 @@ export async function GET() {
     priority: 0.7,
   }));
 
-  const xml = toXml([...pages, ...categoryEntries, ...postEntries, ...caseStudyEntries]);
+  // Only industries with at least one live project (thin pages are noindexed).
+  const industryEntries: Entry[] = industries.length
+    ? [
+        {
+          url: `${SITE_URL}/industries`,
+          lastModified,
+          changeFrequency: "weekly",
+          priority: 0.8,
+        },
+        ...industries.map((industry) => ({
+          url: `${SITE_URL}/industries/${industry.slug}`,
+          lastModified: industry.lastModified,
+          changeFrequency: "monthly" as ChangeFreq,
+          priority: 0.7,
+        })),
+      ]
+    : [];
+
+  const xml = toXml([
+    ...pages,
+    ...industryEntries,
+    ...categoryEntries,
+    ...postEntries,
+    ...caseStudyEntries,
+  ]);
 
   return new Response(xml, {
     headers: { "Content-Type": "application/xml" },

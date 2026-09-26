@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/container";
 import { CalendlyButton } from "@/components/ui/calendly-button";
 import { AiSummaryLinks } from "@/components/ui/ai-summary-links";
 import { KineticGrid } from "@/components/ui/kinetic-grid";
+import { getCoreIndustries } from "@/lib/industries";
 import { LinkedinIcon, InstagramIcon, XIcon } from "@/components/ui/social-icons";
 
 const PROGRAMS = [
@@ -26,11 +27,17 @@ const TOOLS_LIVE = [
 // Not built yet — shown as a preview of what's coming, not linked anywhere.
 const TOOLS_SOON = ["ROI Calculator", "Launch Readiness Quiz"];
 
-export function Footer() {
+export async function Footer() {
+  const industries = await getCoreIndustries();
+
   return (
     <KineticGrid as="footer" className="border-t border-[#1f1f1f] text-white">
       <Container className="relative z-10 py-16 sm:py-20">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div
+          className={`grid grid-cols-1 gap-12 sm:grid-cols-2 ${
+            industries.length > 0 ? "lg:grid-cols-5" : "lg:grid-cols-4"
+          }`}
+        >
           <div>
             <Link
               href="/"
@@ -64,6 +71,32 @@ export function Footer() {
               ))}
             </ul>
           </div>
+
+          {industries.length > 0 && (
+            <div>
+              <h3 className="text-sm font-semibold text-white">Industries</h3>
+              <ul className="mt-4 space-y-3">
+                {industries.map((industry) => (
+                  <li key={industry.id}>
+                    <Link
+                      href={`/industries/${industry.slug}`}
+                      className="text-sm text-white/60 transition-colors hover:text-white"
+                    >
+                      {industry.title}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    href="/industries"
+                    className="text-sm text-white/60 transition-colors hover:text-white"
+                  >
+                    All industries →
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
 
           <div>
             <h3 className="text-sm font-semibold text-white">Tools</h3>
