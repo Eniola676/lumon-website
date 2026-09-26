@@ -299,6 +299,15 @@ export const caseStudy = defineType({
       group: "meta",
     }),
     defineField({
+      name: "featuredOnWebsiteDesign",
+      title: "Show on Website Design page",
+      description:
+        "List this case study in the expanding project list on the /website-design page. Uses the cover image plus the first two gallery images on hover.",
+      type: "boolean",
+      initialValue: false,
+      group: "meta",
+    }),
+    defineField({
       name: "metaDescription",
       title: "Meta description",
       description: "Shown in search results. Keep it around 160 characters.",

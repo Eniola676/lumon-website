@@ -16,6 +16,8 @@ import {
   caseStudyToWorkItem,
   OFFER_LABELS,
   type CaseStudyFull,
+  type CaseStudyGalleryImage,
+  type CaseStudyGalleryItem,
 } from "@/lib/case-studies";
 import { SITE_URL } from "@/lib/site";
 import { urlFor } from "@/sanity/image";
@@ -64,13 +66,45 @@ export async function generateMetadata({
   };
 }
 
-const NARRATIVE_SECTIONS: { key: keyof CaseStudyFull; heading: string }[] = [
+type NarrativeKey = "theClient" | "theChallenge" | "whatWeBuilt" | "theResults" | "whatsPossible";
+
+const NARRATIVE_BEFORE_GALLERY: { key: NarrativeKey; heading: string }[] = [
   { key: "theClient", heading: "The Client" },
   { key: "theChallenge", heading: "The Challenge" },
   { key: "whatWeBuilt", heading: "What We Built Together" },
+];
+
+const NARRATIVE_AFTER_GALLERY: { key: NarrativeKey; heading: string }[] = [
   { key: "theResults", heading: "The Results" },
   { key: "whatsPossible", heading: "What's Possible" },
 ];
+
+type PageSection =
+  | { kind: "text"; key: string; heading: string; value: CaseStudyFull["theClient"] }
+  | { kind: "gallery"; key: string; items: CaseStudyGalleryItem[] };
+
+// Sanity image refs look like "image-<id>-<width>x<height>-<ext>", which lets
+// the gallery render at each image's natural aspect ratio instead of cropping.
+function getImageDimensions(image: CaseStudyGalleryImage): { width: number; height: number } {
+  const ref = (image as { asset?: { _ref?: string } }).asset?._ref ?? "";
+  const match = ref.match(/-(\d+)x(\d+)-/);
+  return match ? { width: Number(match[1]), height: Number(match[2]) } : { width: 1600, height: 1000 };
+}
+
+function buildSections(caseStudy: CaseStudyFull): PageSection[] {
+  const textSection = ({ key, heading }: { key: NarrativeKey; heading: string }): PageSection[] => {
+    const value = caseStudy[key];
+    return value && value.length > 0 ? [{ kind: "text", key, heading, value }] : [];
+  };
+
+  return [
+    ...NARRATIVE_BEFORE_GALLERY.flatMap(textSection),
+    ...(caseStudy.gallery && caseStudy.gallery.length > 0
+      ? [{ kind: "gallery", key: "gallery", items: caseStudy.gallery } as PageSection]
+      : []),
+    ...NARRATIVE_AFTER_GALLERY.flatMap(textSection),
+  ];
+}
 
 export default async function CaseStudyPage({
   params,
@@ -82,6 +116,7 @@ export default async function CaseStudyPage({
   if (!caseStudy) notFound();
 
   const relatedCaseStudies = await getRelatedCaseStudies(caseStudy, 3);
+  const sections = buildSections(caseStudy);
   const url = `${SITE_URL}/case-studies/${caseStudy.slug}`;
   const offerLabel = OFFER_LABELS[caseStudy.relatedOffer];
 
@@ -218,78 +253,72 @@ export default async function CaseStudyPage({
         </Container>
       </section>
 
-      {/* Narrative sections */}
-      {NARRATIVE_SECTIONS.map(({ key, heading }, index) => {
-        const value = caseStudy[key];
-        if (!value || (Array.isArray(value) && value.length === 0)) return null;
-        return (
-          <section key={key} className={index % 2 === 0 ? "bg-[#fbfbfb]" : "bg-white"}>
+      {/* Narrative + gallery. The big gallery sits between the build story and
+          the results so the work is seen before the outcome is read. */}
+      {sections.map((section, index) => (
+        <section key={section.key} className={index % 2 === 0 ? "bg-[#fbfbfb]" : "bg-white"}>
+          {section.kind === "gallery" ? (
+            <Container className="py-16 sm:py-24">
+              <h2 className="text-3xl leading-[1.15] font-normal tracking-tight sm:text-4xl">
+                The <em className="italic">work.</em>
+              </h2>
+              <div className="mt-10 flex flex-col gap-6 sm:gap-8">
+                {section.items.map((item, i) => {
+                  if (item._type === "galleryVideo") {
+                    return (
+                      <div
+                        key={i}
+                        className="relative aspect-video overflow-hidden rounded-2xl bg-[#e9e9ea] sm:rounded-3xl"
+                      >
+                        <video
+                          src={item.file.url}
+                          poster={
+                            item.poster
+                              ? urlFor(item.poster).width(2000).auto("format").url()
+                              : undefined
+                          }
+                          controls
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          preload="metadata"
+                          aria-label={item.caption ?? `${caseStudy.companyName} project video ${i + 1}`}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    );
+                  }
+                  const { width, height } = getImageDimensions(item);
+                  return (
+                    <Image
+                      key={i}
+                      src={urlFor(item).width(2000).auto("format").url()}
+                      alt={item.alt ?? `${caseStudy.companyName} project image ${i + 1}`}
+                      width={width}
+                      height={height}
+                      loading={i === 0 ? "eager" : "lazy"}
+                      sizes="(min-width: 1280px) 1216px, 100vw"
+                      className="h-auto w-full rounded-2xl bg-[#e9e9ea] sm:rounded-3xl"
+                    />
+                  );
+                })}
+              </div>
+            </Container>
+          ) : (
             <Container className="py-16 sm:py-24">
               <div className="mx-auto max-w-3xl">
                 <h2 className="text-3xl leading-[1.15] font-normal tracking-tight sm:text-4xl">
-                  {heading}
+                  {section.heading}
                 </h2>
                 <div className="mt-6 text-base leading-relaxed text-gray-700 sm:text-lg">
-                  <PortableText
-                    // Narrative section fields are typed as PortableTextBlock[]
-                    value={value as CaseStudyFull["theClient"]}
-                    components={portableTextComponents}
-                  />
+                  <PortableText value={section.value} components={portableTextComponents} />
                 </div>
               </div>
             </Container>
-          </section>
-        );
-      })}
-
-      {/* Gallery */}
-      {caseStudy.gallery && caseStudy.gallery.length > 0 && (
-        <section className="bg-white">
-          <Container className="py-16 sm:py-24">
-            <h2 className="text-3xl leading-[1.15] font-normal tracking-tight sm:text-4xl">
-              The <em className="italic">work.</em>
-            </h2>
-            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {caseStudy.gallery.map((item, i) =>
-                item._type === "galleryVideo" ? (
-                  <div
-                    key={i}
-                    className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#fbfbfb]"
-                  >
-                    <video
-                      src={item.file.url}
-                      poster={
-                        item.poster
-                          ? urlFor(item.poster).width(1000).height(750).fit("crop").auto("format").url()
-                          : undefined
-                      }
-                      controls
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                      aria-label={item.caption ?? `${caseStudy.companyName} project video ${i + 1}`}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                ) : (
-                  <div key={i} className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#fbfbfb]">
-                    <Image
-                      src={urlFor(item).width(1000).height(750).fit("crop").auto("format").url()}
-                      alt={item.alt ?? `${caseStudy.companyName} project image ${i + 1}`}
-                      fill
-                      loading="lazy"
-                      sizes="(min-width: 640px) 50vw, 100vw"
-                      className="object-cover"
-                    />
-                  </div>
-                )
-              )}
-            </div>
-          </Container>
+          )}
         </section>
-      )}
+      ))}
 
       {/* Testimonials */}
       {caseStudy.testimonials && caseStudy.testimonials.length > 0 && (

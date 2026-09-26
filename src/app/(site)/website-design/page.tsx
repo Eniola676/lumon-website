@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { X } from "lucide-react";
+import { X, ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { CalendlyButton } from "@/components/ui/calendly-button";
 import { AnimatedServiceList } from "@/components/ui/animated-service-list";
@@ -16,7 +16,8 @@ import { Stars } from "@/components/ui/stars";
 import { TestimonialWall } from "@/components/testimonial-wall";
 import { PLATFORM_LOGOS } from "@/lib/platform-logos";
 import { CLIENTS } from "@/lib/clients";
-import { getFeaturedCaseStudies, caseStudyToWorkItem } from "@/lib/case-studies";
+import { getFeaturedCaseStudies, getWebsiteDesignCaseStudies, caseStudyToWorkItem } from "@/lib/case-studies";
+import { CaseStudyAccordion } from "@/components/ui/case-study-accordion";
 import { WEBSITE_DESIGN_FEATURES } from "@/lib/feature-sections";
 
 // Same page as the homepage, section for section — just not aimed at any
@@ -45,6 +46,7 @@ export const metadata: Metadata = {
 export default async function WebsiteDesignPage() {
   const caseStudies = await getFeaturedCaseStudies();
   const workItems = caseStudies.length > 0 ? caseStudies.map(caseStudyToWorkItem) : CLIENTS;
+  const projects = await getWebsiteDesignCaseStudies();
 
   return (
     <>
@@ -195,6 +197,33 @@ export default async function WebsiteDesignPage() {
           />
         </Container>
       </section>
+
+      {/* Projects */}
+      {projects.length > 0 && (
+        <section className="bg-[#070707] text-white">
+          <Container className="pt-16 pb-10 sm:pt-24 sm:pb-14">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <h2 className="text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl">
+                  Websites we&rsquo;ve <em className="italic">built.</em>
+                </h2>
+                <p className="mt-4 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
+                  A few recent projects. Hover a row to see the work.
+                </p>
+              </div>
+              <Link
+                href="/case-studies"
+                className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-white/70 hover:text-white"
+              >
+                View all case studies
+                <ArrowUpRight className="size-4" />
+              </Link>
+            </div>
+          </Container>
+          <CaseStudyAccordion items={projects} />
+          <div className="pb-16 sm:pb-24" />
+        </section>
+      )}
 
       <TestimonialWall />
 

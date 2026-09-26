@@ -102,6 +102,29 @@ export async function getFeaturedCaseStudies(limit = 6): Promise<CaseStudyCard[]
   }
 }
 
+export type WebsiteDesignCaseStudy = CaseStudyCard & {
+  tools?: string[];
+  previewImages?: CaseStudyImage[];
+};
+
+export async function getWebsiteDesignCaseStudies(limit = 8): Promise<WebsiteDesignCaseStudy[]> {
+  if (!sanityClient) return [];
+
+  try {
+    return await sanityClient.fetch<WebsiteDesignCaseStudy[]>(
+      `*[${PUBLISHED_FILTER} && featuredOnWebsiteDesign == true] | order(publishedAt desc) [0...$limit] {
+        ${CARD_FIELDS},
+        "tools": toolsUsed[].name,
+        "previewImages": gallery[_type == "image"][0...2]
+      }`,
+      { limit }
+    );
+  } catch (err) {
+    console.error("getWebsiteDesignCaseStudies failed", err);
+    return [];
+  }
+}
+
 export async function getCaseStudiesByOffer(
   offer: Exclude<RelatedOffer, "none">,
   limit = 3
