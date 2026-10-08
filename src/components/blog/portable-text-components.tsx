@@ -1,6 +1,7 @@
 import type { PortableTextComponents } from "@portabletext/react";
 import { urlFor } from "@/sanity/image";
 import type { PostImage } from "@/lib/blog";
+import { CalculatorCTA } from "@/components/ui/calculator-cta";
 
 type TableRow = { _key: string; cells?: string[] };
 type TableValue = { rows?: TableRow[] };
@@ -82,6 +83,9 @@ export function getPortableTextComponents(
           loading="lazy"
           className="mt-6 h-auto w-full rounded-2xl"
         />
+      ),
+      calculatorCta: ({ value }: { value: { heading?: string } }) => (
+        <CalculatorCTA heading={value.heading} />
       ),
       tableBlock: ({ value }: { value: TableValue }) => {
         const rows = value.rows ?? [];

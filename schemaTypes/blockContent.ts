@@ -1,4 +1,4 @@
-import { defineArrayMember, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 // Reusable Portable Text field: paragraphs, H2/H3 headings, bullet/numbered
 // lists, inline marks, plus our custom table object and inline images.
@@ -56,5 +56,25 @@ export const blockContent = defineType({
       ],
     }),
     defineArrayMember({ type: "tableBlock" }),
+    defineArrayMember({
+      type: "object",
+      name: "calculatorCta",
+      title: "Calculator CTA",
+      description: "Drops a link card to the course price calculator inline in the article.",
+      fields: [
+        defineField({
+          name: "heading",
+          title: "Heading (optional)",
+          description: "Overrides the default \"What should your course actually cost?\" line.",
+          type: "string",
+        }),
+      ],
+      preview: {
+        select: { heading: "heading" },
+        prepare({ heading }: { heading?: string }) {
+          return { title: "Calculator CTA", subtitle: heading || "What should your course actually cost?" };
+        },
+      },
+    }),
   ],
 });

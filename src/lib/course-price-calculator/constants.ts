@@ -231,6 +231,23 @@ export const EMAIL_CAPTURE_COPY = {
   errorMessage: "Something went wrong sending that — try again in a moment.",
 };
 
+// --- Platform & tool costs (optional, user-entered — no vendor prices here) -
+
+export const PLATFORM_COSTS_COPY = {
+  toggleLabel: "Add my platform & tool costs",
+  heading: "Platform & tool costs",
+  body: "Optional. Enter your own monthly costs and we'll show the minimum price you'd need to charge to break even.",
+  platformFeeLabel: "Course platform fee ($/mo)",
+  emailToolFeeLabel: "Email tool fee ($/mo)",
+  otherToolsFeeLabel: "Other tools ($/mo)",
+  studentsPerMonthLabel: "Expected students per month",
+  breakEvenLabel: "Minimum price to break even",
+  belowRangeMessage: "Your break-even price is comfortably under your suggested price — healthy margin.",
+  aboveRangeMessage:
+    "Your break-even price is above the top of your suggested range. Raise your price, cut costs, or plan on more students per month.",
+  needsStudentsMessage: "Add your expected students per month to see the break-even price.",
+};
+
 // --- Bottom-of-page CTA -------------------------------------------------------
 
 export const LAUNCH_CTA_COPY = {

@@ -66,6 +66,20 @@ export type CalculationResult = {
   footnote: string;
 };
 
+// User-entered, not derived from quiz answers — no vendor prices are ever
+// hardcoded here, these are whatever the visitor types in.
+export type PlatformCosts = {
+  platformFee: number;
+  emailToolFee: number;
+  otherToolsFee: number;
+  studentsPerMonth: number;
+};
+
+export type BreakEvenResult = {
+  totalMonthlyCost: number;
+  breakEvenPrice: number | null;
+};
+
 export type StepId =
   | "format"
   | "access"

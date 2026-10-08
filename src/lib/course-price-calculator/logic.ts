@@ -26,7 +26,7 @@ import {
   SKILL_CEILING_MULTIPLIER,
   UNDERPRICED_CEILING_MULTIPLIER,
 } from "./constants";
-import type { Answers, CalculationResult, CompleteAnswers, Flag, StepId } from "./types";
+import type { Answers, BreakEvenResult, CalculationResult, CompleteAnswers, Flag, PlatformCosts, StepId } from "./types";
 
 function find<T extends { id: string }>(options: T[], id: string | undefined): T {
   const found = options.find((o) => o.id === id);
@@ -204,6 +204,20 @@ export function calculatePrice(answers: CompleteAnswers): CalculationResult {
     whyThisNumber,
     footnote: RESULT_FOOTNOTE,
   };
+}
+
+/** Pure math over whatever the visitor typed into the "Platform & tool
+ * costs" panel — no vendor price is ever hardcoded here. breakEvenPrice is
+ * null until they've entered both a cost and an expected student count. */
+export function calculateBreakEven(costs: PlatformCosts): BreakEvenResult {
+  const totalMonthlyCost =
+    Math.max(costs.platformFee, 0) + Math.max(costs.emailToolFee, 0) + Math.max(costs.otherToolsFee, 0);
+  const breakEvenPrice =
+    totalMonthlyCost > 0 && costs.studentsPerMonth > 0
+      ? totalMonthlyCost / costs.studentsPerMonth
+      : null;
+
+  return { totalMonthlyCost, breakEvenPrice };
 }
 
 /** Human-readable labels for the hidden fields sent alongside the email

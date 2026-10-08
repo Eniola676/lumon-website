@@ -20,11 +20,13 @@ export function OfferPage({
   showTestimonialWall = false,
   proofWorkItems,
   featureSection,
+  showResourcesRow = false,
 }: {
   offer: OfferContent;
   showTestimonialWall?: boolean;
   proofWorkItems?: WorkItem[];
   featureSection?: FeatureSectionContent;
+  showResourcesRow?: boolean;
 }) {
   return (
     <>
@@ -220,6 +222,24 @@ export function OfferPage({
                 </Link>
                 .
               </p>
+              {showResourcesRow && (
+                <p className="mt-3 text-sm text-gray-500">
+                  Resources:{" "}
+                  <Link
+                    href="/blog/kajabi-vs-thinkific-vs-teachable"
+                    className="underline underline-offset-4 hover:text-black"
+                  >
+                    Kajabi vs Thinkific vs Teachable
+                  </Link>{" "}
+                  ·{" "}
+                  <Link
+                    href="/tools/course-price-calculator"
+                    className="underline underline-offset-4 hover:text-black"
+                  >
+                    Course Price Calculator
+                  </Link>
+                </p>
+              )}
             </div>
           </div>
         </Container>

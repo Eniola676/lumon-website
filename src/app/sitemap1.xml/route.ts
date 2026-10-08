@@ -92,7 +92,7 @@ export async function GET() {
 
   const postEntries: Entry[] = posts.map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
-    lastModified: post.publishedAt,
+    lastModified: post.updatedAt,
     changeFrequency: "monthly",
     priority: 0.6,
   }));

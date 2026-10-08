@@ -27,6 +27,7 @@ export default async function LaunchPage() {
       showTestimonialWall
       proofWorkItems={proofWorkItems}
       featureSection={LAUNCH_FEATURES}
+      showResourcesRow
     />
   );
 }

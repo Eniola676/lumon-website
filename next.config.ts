@@ -25,6 +25,19 @@ const nextConfig: NextConfig = {
         destination: "https://www.lumonstudio.xyz/:path*",
         permanent: true,
       },
+      // Old slugs renamed 2026-09-15 with no redirect added — Google kept
+      // both versions indexed as duplicates, which tracks with the Sept 20
+      // impressions drop. These send the old URLs' existing link/ranking
+      // equity to the routes that actually exist now.
+      { source: "/scale", destination: "/lumon-scale", permanent: true },
+      { source: "/enterprise", destination: "/lumon-enterprise", permanent: true },
+      { source: "/contact", destination: "/contact-us", permanent: true },
+      { source: "/privacy-policy", destination: "/privacy", permanent: true },
+      {
+        source: "/tools/online-course-price-calculator",
+        destination: "/tools/course-price-calculator",
+        permanent: true,
+      },
     ];
   },
   // PostHog reverse proxy — routes analytics through our own domain so

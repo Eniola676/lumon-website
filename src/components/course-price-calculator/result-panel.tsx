@@ -5,6 +5,7 @@ import { formatUSD, buildLeadFields } from "@/lib/course-price-calculator/logic"
 import type { CalculationResult, CompleteAnswers } from "@/lib/course-price-calculator/types";
 import { useCountUp } from "./use-count-up";
 import { EmailCapture } from "./email-capture";
+import { PlatformCosts } from "./platform-costs";
 
 const FLAG_STYLES = {
   warning: "border-amber-400/30 bg-amber-400/10 text-amber-100",
@@ -71,6 +72,8 @@ export function ResultPanel({
         </div>
 
         <p className="mt-6 text-xs leading-relaxed text-white/40">{result.footnote}</p>
+
+        <PlatformCosts high={result.high} />
 
         <button
           type="button"

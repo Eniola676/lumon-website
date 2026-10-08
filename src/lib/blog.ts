@@ -15,7 +15,13 @@ export type Post = {
   publishedAt: string;
 };
 
-export type PostWithBody = Post & { body: PortableTextBlock[] };
+export type PostWithBody = Post & {
+  body: PortableTextBlock[];
+  seoTitle: string | null;
+  seoDescription: string | null;
+  relatedPosts: Post[];
+  updatedAt: string;
+};
 
 // Every field we need for a listing card / OG image — never fetch `body`
 // here, that's only pulled for the single-post query.
@@ -87,10 +93,19 @@ export async function getPostBySlug(slug: string): Promise<PostWithBody | null> 
 
   try {
     const post = await sanityClient.fetch<PostWithBody | null>(
-      `*[${PUBLISHED_FILTER} && slug.current == $slug][0] { ${CARD_FIELDS}, body }`,
+      `*[${PUBLISHED_FILTER} && slug.current == $slug][0] {
+        ${CARD_FIELDS},
+        body,
+        seoTitle,
+        seoDescription,
+        "updatedAt": _updatedAt,
+        "relatedPosts": relatedPosts[]->{ ${CARD_FIELDS} }[publishedAt <= now()]
+      }`,
       { slug }
     );
-    return post ?? null;
+    // GROQ returns null (not []) for relatedPosts when the field is unset
+    // or every reference has been unpublished/deleted.
+    return post ? { ...post, relatedPosts: post.relatedPosts ?? [] } : null;
   } catch (err) {
     console.error("getPostBySlug failed", err);
     return null;
@@ -163,13 +178,13 @@ export async function getAllSlugs(): Promise<string[]> {
 }
 
 export async function getSitemapPosts(): Promise<
-  { slug: string; publishedAt: string }[]
+  { slug: string; updatedAt: string }[]
 > {
   if (!sanityClient) return [];
 
   try {
-    return await sanityClient.fetch<{ slug: string; publishedAt: string }[]>(
-      `*[${PUBLISHED_FILTER}] { "slug": slug.current, publishedAt }`
+    return await sanityClient.fetch<{ slug: string; updatedAt: string }[]>(
+      `*[${PUBLISHED_FILTER}] { "slug": slug.current, "updatedAt": _updatedAt }`
     );
   } catch (err) {
     console.error("getSitemapPosts failed", err);

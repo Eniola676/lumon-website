@@ -18,6 +18,7 @@ import { PLATFORM_LOGOS } from "@/lib/platform-logos";
 import { CLIENTS } from "@/lib/clients";
 import { getFeaturedCaseStudies, caseStudyToWorkItem } from "@/lib/case-studies";
 import { HOME_FEATURES } from "@/lib/feature-sections";
+import { SITE_URL } from "@/lib/site";
 
 const FAILURE_LIST = [
   "Six months comparing Kajabi, Thinkific, Teachable, and Podia",
@@ -45,8 +46,25 @@ export default async function Home() {
   // even as real case studies get featured/unfeatured over time.
   const workItems = CLIENTS;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Lumon Studios",
+    url: SITE_URL,
+    logo: `${SITE_URL}/icon.svg`,
+    sameAs: [
+      "https://www.linkedin.com/company/lumon-studio/",
+      "https://www.instagram.com/lumonweb",
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero */}
       <section className="relative flex min-h-[90vh] flex-col overflow-hidden bg-[#3d7cc9] text-white sm:min-h-[95vh]">
         {/*
@@ -274,6 +292,22 @@ export default async function Home() {
               Send us a message
             </Link>{" "}
             instead.
+          </p>
+          <p className="mt-3 text-sm text-white/40">
+            Resources:{" "}
+            <Link
+              href="/blog/kajabi-vs-thinkific-vs-teachable"
+              className="underline underline-offset-4 hover:text-white"
+            >
+              Kajabi vs Thinkific vs Teachable
+            </Link>{" "}
+            ·{" "}
+            <Link
+              href="/tools/course-price-calculator"
+              className="underline underline-offset-4 hover:text-white"
+            >
+              Course Price Calculator
+            </Link>
           </p>
         </Container>
       </section>

@@ -11,23 +11,24 @@ import { SITE_URL } from "@/lib/site";
 const PATH = "/tools/course-price-calculator";
 const PAGE_URL = `${SITE_URL}${PATH}`;
 
+const META_TITLE = "Online Course Pricing Calculator (2026) | Lumon Studios";
+const META_DESCRIPTION =
+  "Free calculator for pricing an online course. Get a data-backed range that factors in your platform costs, too.";
+
 export const metadata: Metadata = {
-  title: "Online Course Price Calculator — Find Out What to Charge (Free Tool) | Lumon Studios",
-  description:
-    "Free online course price calculator. Answer a few quick questions and get a data-backed price range for your first course, plus the plan to launch it.",
+  title: { absolute: META_TITLE },
+  description: META_DESCRIPTION,
   alternates: { canonical: PATH },
   openGraph: {
-    title: "Online Course Price Calculator — Find Out What to Charge",
-    description:
-      "Answer a few quick questions and get a data-backed price range for your first course.",
+    title: META_TITLE,
+    description: META_DESCRIPTION,
     url: PAGE_URL,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Online Course Price Calculator — Find Out What to Charge",
-    description:
-      "Answer a few quick questions and get a data-backed price range for your first course.",
+    title: META_TITLE,
+    description: META_DESCRIPTION,
   },
 };
 
@@ -56,6 +57,25 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
     q: "Can I change my price after I launch?",
     a: "Yes, and you should expect to. Treat the calculator's range as your starting price, not a permanent one. If fewer than 1 in 100 visitors buy, test a lower price; if more than 1 in 20 buy, you're underpriced — raise it.",
   },
+  // Requested additions (Oct 2026 SEO pass) — placeholder copy. Replace
+  // each "a" with real answer copy before shipping; left unwritten
+  // deliberately rather than inventing pricing figures.
+  {
+    q: "How much should I charge for my online course?",
+    a: "[PLACEHOLDER — write this answer]",
+  },
+  {
+    q: "What does a course platform cost?",
+    a: "[PLACEHOLDER — write this answer]",
+  },
+  {
+    q: "Should I price by hour of content?",
+    a: "[PLACEHOLDER — write this answer]",
+  },
+  {
+    q: "How do I know if my price is too low?",
+    a: "[PLACEHOLDER — write this answer]",
+  },
 ];
 
 const jsonLd = [
@@ -73,7 +93,7 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "Online Course Price Calculator",
+    name: "Online Course Pricing Calculator",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     url: PAGE_URL,
@@ -111,7 +131,7 @@ export default function CoursePriceCalculatorPage() {
           <div className="mx-auto max-w-xl text-center">
             <p className="font-mono text-xs tracking-wide text-gray-500 uppercase">Free tool</p>
             <h1 className="mt-3 text-4xl leading-[1.1] font-normal tracking-tight sm:text-5xl lg:text-6xl">
-              Online Course Price Calculator
+              Online Course Pricing Calculator
             </h1>
             <p className="mt-6 text-base leading-relaxed text-gray-600 sm:text-lg">
               Answer 8 quick questions. Get an accurate, data-backed price
@@ -121,6 +141,45 @@ export default function CoursePriceCalculatorPage() {
 
           <div className="mx-auto mt-12 max-w-2xl">
             <CoursePriceCalculator />
+          </div>
+        </Container>
+      </section>
+
+      {/* How this calculator works */}
+      <section className="bg-white">
+        <Container className="pb-16 sm:pb-24">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-3xl leading-[1.15] font-normal tracking-tight sm:text-4xl">
+              How this <em className="italic">calculator works.</em>
+            </h2>
+            <p className="mt-6 text-base leading-relaxed text-gray-700 sm:text-lg">
+              Every price range comes from three anchors, computed live from
+              your answers — no AI, no black box:
+            </p>
+            <ol className="mt-6 space-y-4 text-base leading-relaxed text-gray-700 sm:text-lg">
+              <li>
+                <span className="font-medium text-black">1. Market band —</span>{" "}
+                your format (mini-course, self-paced, cohort, etc.) sets a
+                base price range, then your topic category and how much
+                access students get to you adjust it up or down.
+              </li>
+              <li>
+                <span className="font-medium text-black">2. Proof score —</span>{" "}
+                your experience and audience size position your price inside
+                that band — more proof moves you toward the top.
+              </li>
+              <li>
+                <span className="font-medium text-black">3. Value ceiling —</span>{" "}
+                what the result is actually worth to the student (money
+                earned, or the cost of the next-best alternative) caps how
+                high that price can honestly go.
+              </li>
+            </ol>
+            <p className="mt-4 text-base leading-relaxed text-gray-700 sm:text-lg">
+              If you add your platform and tool costs in the results panel,
+              the calculator also shows the minimum price you&rsquo;d need to
+              charge to break even at your expected volume.
+            </p>
           </div>
         </Container>
       </section>

@@ -34,23 +34,26 @@ export async function generateMetadata({
 
   const url = `${SITE_URL}/blog/${post.slug}`;
   const ogImage = urlFor(post.mainImage).width(1200).height(630).fit("crop").auto("format").url();
+  const title = post.seoTitle || post.title;
+  const description = post.seoDescription || post.metaDescription;
 
   return {
-    title: `${post.title} — Lumon Studios`,
-    description: post.metaDescription,
+    title: { absolute: `${title} — Lumon Studios` },
+    description,
     alternates: { canonical: url },
     openGraph: {
-      title: post.title,
-      description: post.metaDescription,
+      title,
+      description,
       url,
       type: "article",
       publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt,
       images: [{ url: ogImage, width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.metaDescription,
+      title,
+      description,
       images: [ogImage],
     },
   };
@@ -69,7 +72,10 @@ export default async function BlogPostPage({
   const headingIds = getHeadingIds(post.body);
   const components = getPortableTextComponents(headingIds);
 
-  const relatedPosts = await getRelatedPosts(post, 3);
+  // Editors can hand-pick up to 3 related posts in Sanity; falls back to
+  // same-category matching when they haven't set any.
+  const relatedPosts =
+    post.relatedPosts.length > 0 ? post.relatedPosts : await getRelatedPosts(post, 3);
   const url = `${SITE_URL}/blog/${post.slug}`;
   const jsonLdImage = urlFor(post.mainImage).width(1200).auto("format").url();
 
@@ -77,12 +83,16 @@ export default async function BlogPostPage({
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
-    description: post.metaDescription,
+    description: post.seoDescription || post.metaDescription,
     image: [jsonLdImage],
     datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
-    author: { "@type": "Organization", name: "Lumon Studios" },
-    publisher: { "@type": "Organization", name: "Lumon Studios" },
+    dateModified: post.updatedAt,
+    author: { "@type": "Person", name: "Tobi Ojetoyinbo" },
+    publisher: {
+      "@type": "Organization",
+      name: "Lumon Studios",
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/icon.svg` },
+    },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
   };
 
